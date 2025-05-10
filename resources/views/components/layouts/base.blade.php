@@ -14,7 +14,7 @@
         <x-layouts.template.socials :$title :description="$description ?? ''" />
         <x-layouts.template.resources />
     </head>
-    <body class="min-h-screen bg-zinc-200/60 dark:bg-charcoal antialiased">
+    <body class="min-h-screen bg-zinc-200/60 dark:!bg-zinc-900 antialiased dark:border-zinc-700/60 bg-texture-a-light dark:bg-texture-b-dark">
         <x-layouts.template.wrapper>
             {{ $slot }}
         </x-layouts.template.wrapper>

@@ -1,5 +1,5 @@
 <form wire:submit="submit">
-    <flux:card class="space-y-4 p-5 sm:p-6">
+    <flux:card class="space-y-4 p-5 sm:p-6 !shadow-lg">
         <div class="space-y-6 md:space-y-4">
             <header class="relative space-y-5">
                 <x-generator.heading />

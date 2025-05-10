@@ -12,7 +12,7 @@
                     {{ trans('auth.description') }}
                 </flux:text>
             </div>
-            <flux:card>
+            <flux:card class="!shadow-lg">
                 <flux:tab.group>
                     <flux:tabs
                         wire:model.live="type"

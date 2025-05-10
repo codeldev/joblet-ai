@@ -5,7 +5,7 @@
             icon="file-text"
             :description="trans('generator.description')"
         />
-        <div class="space-y-6 lg:space-y-8">
+        <div class="space-y-6 lg:space-y-8 xl:space-y-12">
             @auth
                 <livewire:account.credits :generate="false" />
             @endauth

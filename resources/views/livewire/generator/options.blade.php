@@ -1,4 +1,4 @@
-<flux:card class="p-5 sm:p-6 space-y-4 scroll-mt-20" x-ref="options">
+<flux:card class="p-5 sm:p-6 space-y-4 scroll-mt-20 !shadow-lg" x-ref="options">
     <div>
         <flux:heading
             size="lg"
