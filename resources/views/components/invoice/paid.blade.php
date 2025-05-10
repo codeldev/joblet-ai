@@ -1,7 +1,7 @@
 @props(['settings'])
 <div class="space-y-4">
     <div class="flex justify-center">
-        <div class="!bg-lime-600/70 !text-white font-medium rounded-md h-10 flex items-center justify-center px-3.5">
+        <div class="!bg-emerald-600/70 !text-white font-medium rounded-md h-10 flex items-center justify-center px-3.5">
             {{ trans('invoice.paid') }}
         </div>
     </div>

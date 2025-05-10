@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Config;
 beforeEach(closure: function (): void
 {
     Config::set(key: 'settings.invoices.address', value: 'Line 1|Line 2|Line 3');
-    Config::set(key: 'app.name', value: 'JobletAI');
+    Config::set(key: 'app.name', value: 'Joblet');
     Config::set(key: 'app.url', value: 'https://joblet.ai');
     Config::set(key: 'settings.contact', value: 'contact@joblet.ai');
     Config::set(key: 'settings.invoices.descriptor', value: 'Invoice');
@@ -83,7 +83,7 @@ it(description: 'builds complete invoice data with all components', closure: fun
         ->toBeArray()
         ->toHaveKeys(keys: ['name', 'website', 'email', 'descriptor', 'address'])
         ->and(value: $result['settings']['name'])
-        ->toBe(expected: 'JobletAI')
+        ->toBe(expected: 'Joblet')
         ->and(value: $result['settings']['website'])
         ->toBe(expected: 'https://joblet.ai')
         ->and(value: $result['settings']['email'])

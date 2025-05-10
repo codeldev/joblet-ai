@@ -34,7 +34,7 @@
                 {{ trans('invoice.items.paid') }}
             </span>
         </div>
-        <div class="w-20 flex-none text-lime-600 font-semibold text-right">
+        <div class="w-20 flex-none text-indigo-600 font-semibold text-right">
             {{ $payment['amount'] }}
         </div>
     </div>

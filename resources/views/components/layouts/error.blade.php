@@ -5,8 +5,8 @@
             <a href="{{ route('home') }}">
                 <x-brand size="lg" />
             </a>
-            <div class="text-center rounded-xl p-6 bg-black/15">
-                <flux:heading level="1" class="!text-base xs:!text-lg text-rose-500 !font-medium">
+            <div class="text-center rounded-xl p-6 bg-white dark:bg-black/15">
+                <flux:heading level="1" class="!text-base xs:!text-lg text-indigo-600 dark:text-indigo-500 !font-medium">
                     {{ $title }}
                 </flux:heading>
                 <flux:subheading clas="leading-relaxed text-center">

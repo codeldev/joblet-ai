@@ -16,7 +16,7 @@ final class DatabaseSeeder extends Seeder
                 'email' => config(key: 'settings.contact'),
             ],
             values: [
-                'name'     => 'JobletAI Support',
+                'name'     => 'Joblet Support',
                 'password' => bcrypt(value: str()->random(40)),
             ]
         );

@@ -1,6 +1,6 @@
 @props(['order', 'payment'])
 
-<div class="uppercase w-full rounded-lg bg-lime-600/70 text-white text-xl text-center py-3.5">
+<div class="uppercase w-full rounded-lg bg-indigo-600/70 text-white text-xl text-center py-3.5">
     <span class="font-light">
         {{ trans('invoice.invoice') }}
     </span>

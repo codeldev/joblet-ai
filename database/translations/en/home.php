@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 return [
     'title'                            => 'Create Professional Cover Letters in Minutes',
-    'description'                      => 'Create compelling cover letters with JobletAI, delivering customisable templates that highlight your qualifications and capture employer attention. Sign up today!',
+    'description'                      => 'Create compelling cover letters with Joblet, delivering customisable templates that highlight your qualifications and capture employer attention. Sign up today!',
     // HERO SECTION
     'hero.title.part1'                 => 'Build your winning',
     'hero.title.part2'                 => 'Covering Letter',
@@ -26,7 +26,7 @@ return [
     'benefits.list.3.title'            => 'Save Time',
     'benefits.list.3.text'             => 'Creating a well-crafted cover letter typically requires multiple drafts and revisions for each job application. Our service delivers a polished letter in minutes without requiring writing expertise, letting you focus on other aspects of your job search.',
     'benefits.list.4.title'            => 'Stand Out From Competition',
-    'benefits.list.4.text'             => 'The competitive nature of job applications demands cover letters that capture attention. Your JobletAI letter highlights your unique value proposition and relevant skills, ensuring your application rises above the crowd and increases your chances of securing an interview.',
+    'benefits.list.4.text'             => 'The competitive nature of job applications demands cover letters that capture attention. Your Joblet letter highlights your unique value proposition and relevant skills, ensuring your application rises above the crowd and increases your chances of securing an interview.',
     // PROCESS SECTION - HOW IT WORKS
     'process.title.part1'              => 'Three Steps to',
     'process.title.part2'              => 'Success',
@@ -42,7 +42,7 @@ return [
     // TESTIMONIALS SECTION - SUCCESS STORIES
     'testimonials.title.part1'         => 'Application',
     'testimonials.title.part2'         => 'Game-Changers',
-    'testimonials.subtitle'            => 'See how successful applicants use JobletAI to craft compelling applications that showcase their value to employers.',
+    'testimonials.subtitle'            => 'See how successful applicants use Joblet to craft compelling applications that showcase their value to employers.',
     // PRICING SECTION
     'pricing.title.part1'              => 'Flexible',
     'pricing.title.part2'              => 'Simple',
@@ -59,7 +59,7 @@ return [
     'action.title.part1'               => 'Are you ready to',
     'action.title.part2'               => 'Impress Employers',
     'action.title.part3'               => '?',
-    'action.subtitle'                  => 'Stand alongside countless professionals who have used JobletAI to create standout applications that land interviews!',
+    'action.subtitle'                  => 'Stand alongside countless professionals who have used Joblet to create standout applications that land interviews!',
     'action.button1'                   => 'Sign up & get started',
     'action.button2'                   => 'Start your letter build',
     // LETTER PREVIEWS

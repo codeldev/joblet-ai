@@ -1,17 +1,24 @@
 @props(['size' => 'default'])
-<div class="flex items-center gap-2">
-    @switch($size)
-        @case('pdf')
-            <x-brand.text class="mt-0.5 h-11 text-zinc-600" />
-            <x-brand.icon class="h-11 text-indigo-500" />
-        @break
-        @case('lg')
-            <x-brand.text class="mt-0.5 h-9 xs:h-10 sm:h-12 text-zinc-600 dark:text-white" />
-            <x-brand.icon class="h-9 xs:h-10 sm:h-12 text-indigo-500 dark:text-indigo-300/90" />
-        @break
-        @default
-            <x-brand.text class="mt-0.5 h-5 xs:h-6 sm:h-7 text-zinc-600 dark:text-white" />
-            <x-brand.icon class="h-5 xs:h-6 sm:h-7 text-indigo-500 dark:text-indigo-300/90" />
-        @break
-    @endswitch
-</div>
+@switch($size)
+    @case('pdf')
+        <div class="flex items-center gap-2">
+            <x-brand.part-1 class="h-9 text-zinc-700" />
+            <x-brand..part-2 class="h-10 text-indigo-600" />
+            <x-brand..part-3 class="h-9 text-zinc-700" />
+        </div>
+    @break
+    @case('lg')
+        <div class="flex items-center gap-1.5 dark:gap-2">
+            <x-brand.part-1 class="h-8 sm:h-10 text-zinc-700 dark:text-white" />
+            <x-brand..part-2 class="h-9 sm:h-11 text-indigo-600 dark:text-indigo-300/90" />
+            <x-brand..part-3 class="h-8 sm:h-10 text-zinc-700 dark:text-white" />
+        </div>
+    @break
+    @default
+        <div class="flex items-center gap-1 dark:gap-1.5">
+            <x-brand.part-1 class="h-4 sm:h-5 text-zinc-700 dark:text-white" />
+            <x-brand..part-2 class="h-5 sm:h-6 text-indigo-600 dark:text-indigo-300/90" />
+            <x-brand..part-3 class="h-4 sm:h-5 text-zinc-700 dark:text-white" />
+        </div>
+    @break
+@endswitch
