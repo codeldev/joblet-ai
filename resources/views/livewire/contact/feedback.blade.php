@@ -1,7 +1,7 @@
 <div>
     <div class="fixed z-20 right-0 top-16 sm:top-20">
         <flux:modal.trigger name="feedback-form">
-            <button type="button" class="h-9 w-8 bg-indigo-600 aspect-square rounded-tl-lg rounded-bl-lg text-white flex items-center justify-start pl-2 shadow-lg hover:w-28 opacity-50 hover:opacity-100 ease-in-out duration-150 transition-all cursor-pointer group">
+            <button type="button" class="h-9 w-8 bg-indigo-500 aspect-square rounded-tl-lg rounded-bl-lg text-white flex items-center justify-start pl-2 shadow-lg hover:w-28 opacity-50 hover:opacity-100 ease-in-out duration-150 transition-all cursor-pointer group">
                 <flux:icon.message-circle-more class="size-5 flex-shrink-0" />
                 <span class="text-sm ml-2 opacity-0 w-0 group-hover:opacity-100 group-hover:w-auto overflow-hidden whitespace-nowrap  ease-in-out transition-all duration-150">
                 {{ trans("messages.feedback.trigger") }}

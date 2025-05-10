@@ -89,7 +89,12 @@
 
     [data-flux-card] [data-flux-card]
     {
-        @apply bg-zinc-50 dark:bg-charcoal;
+        @apply bg-transparent dark:bg-charcoal;
+    }
+
+    td
+    {
+        @apply !text-zinc-700 dark:!text-zinc-300
     }
 
     [data-flux-modal] > dialog::backdrop

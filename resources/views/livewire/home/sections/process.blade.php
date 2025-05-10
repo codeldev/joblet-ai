@@ -1,4 +1,4 @@
-<x-home.wrapper class="bg-white dark:bg-charcoal border-y border-zinc-200 dark:border-zinc-700/60">
+<x-home.wrapper class="bg-white dark:bg-charcoal/60 border-y border-zinc-200 dark:border-zinc-700/60 bg-texture-b-light dark:bg-texture-b-dark">
     <x-home.container class="space-y-8 md:space-y-12 lg:space-y-16">
         <x-home.header>
             <x-slot:header>

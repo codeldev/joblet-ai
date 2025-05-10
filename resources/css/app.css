@@ -10,6 +10,11 @@
 {
     --breakpoint-xs: 30rem;
 
+    --background-image-texture-a-dark: url('../img/textures/asfalt-dark.png');
+    --background-image-texture-a-light: url('../img/textures/cream-pixels.png');
+    --background-image-texture-b-light: url('../img/textures/light-wool.png');
+    --background-image-texture-b-dark: url('../img/textures/brilliant.png');
+
     --color-zinc-50: var(--color-neutral-50);
     --color-zinc-100: var(--color-neutral-100);
     --color-zinc-200: var(--color-neutral-200);
@@ -52,6 +57,7 @@
     --color-accent-foreground: var(--color-white);
     --color-charcoal:oklch(24.35% 0.000 0);
 }
+
 @layer theme {
     .dark {
         --color-accent: var(--color-indigo-500);

@@ -50,7 +50,7 @@ export default defineConfig(
 
                         if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType))
                         {
-                            extType = 'img';
+                            extType = 'img/textures';
                         }
 
                         if (extType === 'css')

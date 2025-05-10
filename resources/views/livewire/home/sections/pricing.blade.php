@@ -1,4 +1,4 @@
-<x-home.wrapper class="bg-white dark:bg-charcoal border-y border-zinc-200 dark:border-zinc-700/60">
+<x-home.wrapper class="bg-white dark:bg-charcoal/60 border-y border-zinc-200 dark:border-zinc-700/60 bg-texture-b-light dark:bg-texture-b-dark">
     <x-home.container class="space-y-8 md:space-y-12 lg:space-y-16">
         <x-home.header>
             <x-slot:header>
@@ -12,7 +12,7 @@
                 {{ trans('home.pricing.subtitle') }}
             </x-slot:description>
         </x-home.header>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 2xl:gap-12">
             @foreach($packages as $package)
                 <x-home.package
                     class="{{ $loop->iteration === 1  ? 'col-span-1 md:col-span-2 lg:col-span-1' : '' }}"

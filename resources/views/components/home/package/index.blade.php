@@ -1,7 +1,7 @@
 @props(['title', 'description', 'price', 'label', 'icon', 'button', 'selected' => false])
 
 @php
-    $classes = 'p-8';
+    $classes = 'p-8 !shadow-lg xl:!shadow-2xl border-zinc-300/60';
     $classes .= $selected ? ' relative !border-indigo-500 dark:!border-indigo-300/80' : '';
 @endphp
 
