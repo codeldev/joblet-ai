@@ -1,0 +1,23 @@
+{
+  "id": "evt_test_webhook",
+  "object": "event",
+  "api_version": "2022-11-15",
+  "created": 1234567890,
+  "data": {
+    "object": {
+      "id": "pi_test",
+      "object": "payment_intent",
+      "amount": 2000,
+      "currency": "usd",
+      "status": "succeeded",
+      "metadata": {}
+    }
+  },
+  "livemode": false,
+  "pending_webhooks": 1,
+  "request": {
+    "id": null,
+    "idempotency_key": null
+  },
+  "type": "payment_intent.succeeded"
+}

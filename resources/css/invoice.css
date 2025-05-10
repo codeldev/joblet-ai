@@ -1,0 +1,9 @@
+@import url(https://fonts.bunny.net/css?family=inter:300,400,500,600,700,800&display=swap);
+@import 'tailwindcss';
+@source '../views/pdf';
+@source '../views/components/invoice';
+@theme
+{
+    --font-sans: Inter, sans-serif;
+    --font-mono: Monospace, "DejaVu Sans Mono", "Ubuntu Mono", "SF Mono"
+}

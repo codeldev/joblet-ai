@@ -1,0 +1,11 @@
+{
+    "preset": "laravel",
+    "path" : "lang/en.json",
+    "ignore": {
+        "words": [
+            "php",
+            "signup",
+            "signout"
+        ],
+    }
+}

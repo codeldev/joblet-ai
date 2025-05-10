@@ -1,0 +1,26 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+    - vendor/nesbot/carbon/extension.neon
+
+parameters:
+    level: max
+
+    paths:
+        - app
+        - config
+        - bootstrap
+        - database/factories
+        - routes
+
+    ignoreErrors:
+        - '#Method .*::render\(\) should return Illuminate\\Contracts\\View\\View but returns mixed.#'
+        - '#Parameter \$view of function view expects view-string\|null, string given.#'
+        - '#Cannot call method layoutData\(\) on mixed.#'
+        - '#Method App\\Services\\Backups\\BackupService::createBackupFile\(\) should return bool but returns ZanySoft\\Zip\\Zip.#'
+
+    excludePaths:
+        - app/Concerns/HasNotificationsTrait.php
+        - app/Concerns/HasNotifiableEventsTrait.php
+        - app/Concerns/HasAppMessagesTrait.php
+        - app/Concerns/HasThrottlingTrait.php
+        - tests/*

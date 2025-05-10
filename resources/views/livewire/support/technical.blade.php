@@ -1,0 +1,63 @@
+<flux:card class="space-y-6">
+    <flux:heading size="lg" class="text-indigo-600 dark:text-indigo-300">
+        {{ trans('support.section.technical.title') }}
+    </flux:heading>
+    <flux:accordion>
+        <flux:accordion.item
+            :heading="trans('support.section.technical.1.question')"
+        >
+            <flux:accordion.content>
+                <flux:card class="leading-relaxed space-y-4">
+                    <p>{{ trans('support.section.technical.1.answer.1', ['app' => $appName]) }}</p>
+                    <ul class="list-disc pl-5">
+                        <li>{{ trans('support.section.technical.1.answer.list.1') }}</li>
+                        <li>{{ trans('support.section.technical.1.answer.list.2') }}</li>
+                        <li>{{ trans('support.section.technical.1.answer.list.3') }}</li>
+                        <li>{{ trans('support.section.technical.1.answer.list.4') }}</li>
+                        <li>{{ trans('support.section.technical.1.answer.list.5') }}</li>
+                    </ul>
+                    <p>{{ trans('support.section.technical.1.answer.2') }}</p>
+                </flux:card>
+            </flux:accordion.content>
+        </flux:accordion.item>
+
+        <flux:accordion.item
+            :heading="trans('support.section.technical.2.question', ['app' => $appName])"
+        >
+            <flux:accordion.content>
+                <flux:card class="leading-relaxed space-y-4">
+                    <p>{{ trans('support.section.technical.2.answer.1', ['app' => $appName]) }}</p>
+                    <ul class="list-disc pl-5">
+                        <li>{{ trans('support.section.technical.2.answer.list.1') }}</li>
+                        <li>{{ trans('support.section.technical.2.answer.list.2') }}</li>
+                        <li>{{ trans('support.section.technical.2.answer.list.3') }}</li>
+                        <li>{{ trans('support.section.technical.2.answer.list.4') }}</li>
+                    </ul>
+                    <p>{{ trans('support.section.technical.2.answer.2') }}</p>
+                    <p>{{ trans('support.section.technical.2.answer.3', ['app' => $appName]) }}</p>
+                </flux:card>
+            </flux:accordion.content>
+        </flux:accordion.item>
+
+        <flux:accordion.item
+            :heading="trans('support.section.technical.3.question')"
+        >
+            <flux:accordion.content>
+                <flux:card class="leading-relaxed space-y-4">
+                    <p>{{ trans('support.section.technical.3.answer.1') }}</p>
+                    <p>{!! trans('support.section.technical.3.answer.2', ['email' => $contact]) !!}</p>
+                </flux:card>
+            </flux:accordion.content>
+        </flux:accordion.item>
+        <flux:accordion.item
+            :heading="trans('support.section.technical.4.question')"
+        >
+            <flux:accordion.content>
+                <flux:card class="leading-relaxed space-y-4">
+                    <p>{{ trans('support.section.technical.4.answer.1', ['app' => $appName]) }}</p>
+                    <p>{!! trans('support.section.technical.4.answer.2', ['email' => $contact]) !!}</p>
+                </flux:card>
+            </flux:accordion.content>
+        </flux:accordion.item>
+    </flux:accordion>
+</flux:card>

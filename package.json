@@ -1,0 +1,25 @@
+{
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "vite build",
+        "dev": "vite"
+    },
+    "devDependencies": {
+        "@tailwindcss/vite": "^4.0.0",
+        "axios": "^1.8.2",
+        "concurrently": "^9.0.1",
+        "laravel-vite-plugin": "^1.2.0",
+        "tailwind-scrollbar": "^4.0.0",
+        "tailwindcss": "^4.0.0",
+        "vite": "^6.0.11"
+    },
+    "dependencies": {
+        "@rollup/plugin-terser": "^0.4.4",
+        "canvas-confetti": "^1.9.3",
+        "puppeteer": "23.0.2"
+    },
+    "browserslist": [
+        "defaults, > 0.5% and not dead, last 5 versions"
+    ]
+}

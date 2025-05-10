@@ -1,0 +1,96 @@
+<IfModule mod_deflate.c>
+    <filesMatch "\.(js|css|html|php|svg|json)$">
+        SetOutputFilter DEFLATE
+    </filesMatch>
+</IfModule>
+
+<IfModule mod_expires.c>
+    ExpiresActive on
+
+    # Perhaps better to whitelist expires rules? Perhaps.
+    ExpiresDefault                          "access plus 1 month"
+
+    # cache.appcache needs re-requests in FF 3.6 (thx Remy ~Introducing HTML5)
+    ExpiresByType text/cache-manifest       "access plus 0 seconds"
+
+    # Your document html
+    ExpiresByType text/html                 "access plus 0 seconds"
+
+    # Data
+    ExpiresByType text/xml                  "access plus 0 seconds"
+    ExpiresByType application/xml           "access plus 0 seconds"
+    ExpiresByType application/json          "access plus 0 seconds"
+
+    # RSS feed
+    ExpiresByType application/rss+xml       "access plus 1 hour"
+
+    # Favicon (cannot be renamed)
+    ExpiresByType image/x-icon              "access plus 1 week"
+
+    # Media: images, video, audio
+    ExpiresByType image/gif                 "access plus 1 month"
+    ExpiresByType image/png                 "access plus 1 month"
+    ExpiresByType image/jpg                 "access plus 1 month"
+    ExpiresByType image/jpeg                "access plus 1 month"
+    ExpiresByType video/ogg                 "access plus 1 month"
+    ExpiresByType audio/ogg                 "access plus 1 month"
+    ExpiresByType video/mp4                 "access plus 1 month"
+    ExpiresByType video/webm                "access plus 1 month"
+
+    # HTC files  (css3pie)
+    ExpiresByType text/x-component          "access plus 1 month"
+
+    # Webfonts
+    ExpiresByType font/truetype             "access plus 1 month"
+    ExpiresByType font/opentype             "access plus 1 month"
+    ExpiresByType application/x-font-woff   "access plus 1 month"
+    ExpiresByType font/woff                 "access plus 1 month"
+    ExpiresByType font/woff2                "access plus 1 month"
+    ExpiresByType image/svg+xml             "access plus 1 month"
+    ExpiresByType application/vnd.ms-fontobject "access plus 1 month"
+
+    # CSS and JavaScript
+    ExpiresByType text/css                  "access plus 1 year"
+    ExpiresByType application/javascript    "access plus 1 year"
+    ExpiresByType text/javascript           "access plus 1 year"
+</IfModule>
+
+<ifModule mod_headers.c>
+    Header set Connection keep-alive
+    Header always set X-Content-Type-Options "nosniff"
+
+    <filesMatch ".(x?html?|php)$">
+        Header set Cache-Control "private, must-revalidate"
+    </filesMatch>
+
+    <filesMatch ".(css|jpg|jpeg|png|gif|swf|svg|js|ico|xml|gz|html|json|js|woff|woff2)$">
+        Header set Cache-Control "max-age=2592000, public"
+        Header append Vary: Accept-Encoding
+    </filesMatch>
+</ifModule>
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    # Ensure https
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https
+    RewriteCond %{HTTPS} off
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Send Requests To Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>

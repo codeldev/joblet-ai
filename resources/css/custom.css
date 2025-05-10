@@ -1,0 +1,209 @@
+@layer base
+{
+    html
+    {
+        @apply h-full bg-white scrollbar-thin scrollbar-thumb-zinc-400 scrollbar-track-zinc-100 scroll-smooth dark:bg-zinc-800 dark:scrollbar-thumb-zinc-600 dark:scrollbar-track-zinc-800;
+    }
+
+    [x-cloak]
+    {
+        @apply hidden;
+    }
+
+    button
+    {
+        @apply cursor-pointer;
+    }
+
+    a, button
+    {
+        @apply transition-all duration-300;
+    }
+
+    [data-flux-radio-cards].generator
+    {
+        @apply !p-2.5;
+    }
+
+    [data-flux-radio-cards].generator [data-flux-heading]
+    {
+        @apply !font-normal !text-[0.8rem] !m-0;
+    }
+}
+@layer utilities
+{
+    .faq-support a
+    {
+        @apply
+        !text-indigo-600 hover:!text-indigo-500
+        dark:!text-indigo-300/90 dark:hover:!text-indigo-200
+        underline underline-offset-4 decoration-dashed;
+    }
+
+    .faq-support p
+    {
+        @apply !leading-relaxed;
+    }
+
+
+    [data-flux-accordion-content] *
+    {
+        @apply !text-zinc-800 dark:!text-zinc-300;
+    }
+
+    [data-flux-tab]
+    {
+        @apply h-9;
+    }
+
+    h1[data-flux-heading]
+    {
+        @apply text-xl sm:text-2xl font-semibold;
+    }
+
+    h2[data-flux-heading]
+    {
+        @apply text-base font-medium sm:font-bold;
+    }
+
+    h3[data-flux-heading]
+    {
+        @apply font-normal underline underline-offset-4;
+    }
+
+    [data-flux-text]
+    {
+        @apply text-zinc-700 dark:text-zinc-300;
+    }
+
+
+    [data-flux-tab-panel][data-selected]
+    {
+        @apply !pt-4;
+    }
+
+    [data-flux-card]
+    {
+        @apply dark:bg-zinc-800 shadow-none;
+    }
+
+    [data-flux-card] [data-flux-card]
+    {
+        @apply bg-zinc-50 dark:bg-charcoal;
+    }
+
+    [data-flux-modal] > dialog::backdrop
+    {
+        @apply !bg-zinc-100/80 backdrop-blur-sm;
+    }
+
+    .dark [data-flux-modal] > dialog::backdrop
+    {
+        @apply !bg-charcoal/80 backdrop-blur-sm;
+    }
+
+    [data-flux-modal] > dialog
+    {
+        @apply scrollbar-thin scrollbar-thumb-zinc-400 scrollbar-track-transparent scroll-smooth dark:scrollbar-thumb-zinc-600 dark:scrollbar-track-transparent;
+    }
+
+    input:not([type=checkbox]):not([type=radio]):not([role=combobox]), textarea
+    {
+        @apply h-11 outline-none focus:outline-none dark:!ring-offset-transparent focus:!ring-accent dark:focus:!ring-accent focus:!border-accent focus:dark:!border-accent focus:ring-offset-2 dark:!bg-charcoal dark:placeholder:text-neutral-500
+        !shadow-none dark:!shadow-none;
+    }
+
+    input[role=combobox]
+    {
+        @apply h-11 outline-none focus:outline-none  dark:!bg-charcoal dark:placeholder:text-neutral-500
+        !shadow-none dark:!shadow-none;
+    }
+
+    [data-flux-date-picker-button]
+    {
+        @apply !shadow-none;
+    }
+
+    select, [data-flux-select], [data-flux-select-button]
+    {
+        @apply !h-11 !shadow-none dark:!shadow-none dark:bg-charcoal;
+    }
+
+    [data-flux-date-picker-button]
+    {
+        @apply h-11 dark:!bg-charcoal;
+    }
+
+    [data-flux-navbar-items] > [data-content]
+    {
+        @apply font-normal;
+    }
+
+    [data-flux-options]
+    {
+        @apply dark:!bg-charcoal;
+    }
+
+    .small-description [data-flux-description]
+    {
+        @apply !text-xs !leading-relaxed;
+    }
+
+    [data-flux-description], [data-flux-subheading]
+    {
+        @apply text-zinc-700 dark:text-zinc-400
+    }
+
+    [data-flux-separator]
+    {
+        @apply bg-zinc-800/20 dark:bg-zinc-400/15
+    }
+
+    [data-flux-text]
+    {
+        @apply text-zinc-800 dark:text-zinc-300 leading-relaxed;
+    }
+
+    [data-flux-editor]
+    {
+        @apply bg-zinc-50 dark:bg-charcoal;
+    }
+
+    :where([data-flux-editor] [data-slot="content"])
+    {
+        @apply !p-6 max-xs:!p-4 max-sm:!p-5 !text-zinc-800 dark:!text-zinc-300;
+    }
+
+    [role=toolbar]
+    {
+        @apply !bg-white dark:!bg-zinc-900/60 p-1 sm:p-2;
+    }
+
+    [role=toolbar] div
+    {
+        @apply max-lg:!h-auto max-lg:!flex-wrap max-sm:!justify-center overflow-hidden;
+    }
+
+    [role=toolbar] button
+    {
+        @apply text-zinc-700 dark:text-zinc-300;
+    }
+
+    .\*\*\:data-\[slot\=content\]\:text-base\!
+    {
+        :is(& *)
+        {
+            @apply text-sm;
+        }
+    }
+
+    [data-flux-tooltip-content]
+    {
+        @apply !text-xs py-1 px-2;
+    }
+
+    [data-flux-link]
+    {
+        @apply text-indigo-600/80 dark:text-indigo-300/90;
+    }
+}
