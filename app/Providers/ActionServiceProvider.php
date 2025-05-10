@@ -6,12 +6,16 @@ namespace App\Providers;
 
 use App\Actions\Contact\SendContactAction;
 use App\Actions\Contact\SendFeedbackAction;
+use App\Actions\Generator\GenerateAction;
+use App\Actions\Generator\UploadAction;
 use App\Actions\Orders\OrderAction;
 use App\Actions\Orders\PaymentAction;
 use App\Actions\Orders\ProcessAction;
 use App\Actions\System\SendExceptionMailAction;
 use App\Contracts\Actions\Contact\SendContactActionInterface;
 use App\Contracts\Actions\Contact\SendFeedbackActionInterface;
+use App\Contracts\Actions\Generator\GenerateActionInterface;
+use App\Contracts\Actions\Generator\UploadActionInterface;
 use App\Contracts\Actions\Orders\OrderActionInterface;
 use App\Contracts\Actions\Orders\PaymentActionInterface;
 use App\Contracts\Actions\Orders\ProcessActionInterface;
@@ -52,6 +56,16 @@ final class ActionServiceProvider extends ServiceProvider
         $this->app->bind(
             abstract: SendExceptionMailActionInterface::class,
             concrete: SendExceptionMailAction::class
+        );
+
+        $this->app->bind(
+            abstract: GenerateActionInterface::class,
+            concrete: GenerateAction::class
+        );
+
+        $this->app->bind(
+            abstract: UploadActionInterface::class,
+            concrete: UploadAction::class
         );
     }
 }

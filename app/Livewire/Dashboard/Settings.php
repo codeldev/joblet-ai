@@ -28,10 +28,8 @@ final class Settings extends Component
     #[On('dashboard-view-settings')]
     public function view(Generated $generated): void
     {
-        $this->generated = $generated;
-
         Gate::allows(ability: 'view', arguments: $generated)
-            ? $this->show()
+            ? $this->show(generated: $generated)
             : $this->notifyError(
                 message: trans(key: 'misc.action.disallowed')
             );
@@ -42,8 +40,10 @@ final class Settings extends Component
         $this->reset();
     }
 
-    private function show(): void
+    private function show(Generated $generated): void
     {
+        $this->generated = $generated;
+
         /** @var object $modal */
         $modal = Flux::modal(name: 'show-settings');
 

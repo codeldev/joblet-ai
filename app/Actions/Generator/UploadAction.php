@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Actions\Generator;
 
+use App\Contracts\Actions\Generator\UploadActionInterface;
 use App\Exceptions\Uploads\UploadedResumeEmptyException;
 use App\Models\User;
 use Exception;
@@ -13,7 +14,7 @@ use Illuminate\Support\Str;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Spatie\PdfToText\Pdf;
 
-final class UploadAction
+final class UploadAction implements UploadActionInterface
 {
     private string $fileName = '';
 

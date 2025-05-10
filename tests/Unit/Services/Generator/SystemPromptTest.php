@@ -9,6 +9,7 @@ use App\Enums\LanguageEnum;
 use App\Enums\LetterLengthEnum;
 use App\Enums\LetterStyleEnum;
 use App\Enums\LetterToneEnum;
+use App\Enums\PromptOptionEnum;
 use App\Services\Generator\SystemPrompt;
 
 use function Pest\Laravel\actingAs;
@@ -24,6 +25,16 @@ beforeEach(closure: function (): void
     $this->systemPromptManager        = fake()->name();
     $this->systemPromptDateFormat     = DateFormatEnum::VARIANT_A;
     $this->systemPromptLanguage       = LanguageEnum::EN_GB;
+
+    $this->optionalProperties = [
+        'problem_solving_text' => 1,
+        'growth_interest_text' => 2,
+        'unique_value_text'    => 3,
+        'achievements_text'    => 4,
+        'motivation_text'      => 5,
+        'career_goals'         => 6,
+        'other_details'        => 7,
+    ];
 });
 
 test(description: 'role returns system', closure: function (): void
@@ -152,4 +163,38 @@ test(description: 'build handles missing optional settings with defaults', closu
         ->toContain(needles: LetterLengthEnum::MEDIUM->text())
         ->toContain(needles: DateFormatEnum::VARIANT_A->format())
         ->toContain(needles: LanguageEnum::EN_GB->label());
+});
+
+test(description: 'build includes optional text properties if provided by the user', closure: function (): void
+{
+    collect(value: $this->optionalProperties)->each(callback: function ($enumKey, $fieldName): void
+    {
+        $prompt = new SystemPrompt(settings: [
+            'name'     => $this->systemPromptName,
+            $fieldName => fake()->paragraph(),
+        ]);
+
+        expect(value: $prompt->build())
+            ->toBeString()
+            ->toContain(
+                needles: PromptOptionEnum::from(value: $enumKey)->systemPrompt()
+            );
+    });
+});
+
+test(description: 'build does not include optional text properties if not provided by the user', closure: function (): void
+{
+    collect(value: $this->optionalProperties)->each(callback: function ($enumKey, $fieldName): void
+    {
+        $prompt = new SystemPrompt(settings: [
+            'name'     => $this->systemPromptName,
+            $fieldName => null,
+        ]);
+
+        expect(value: $prompt->build())
+            ->toBeString()
+            ->not->toContain(
+                needles: PromptOptionEnum::from(value: $enumKey)->systemPrompt()
+            );
+    });
 });

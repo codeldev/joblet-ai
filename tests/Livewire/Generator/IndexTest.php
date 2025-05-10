@@ -166,3 +166,61 @@ it('clears the form', function (): void
         ->assertSet(name: 'form.manager', value: null)
         ->assertSet(name: 'form.job_description', value: null);
 });
+
+it('shows an error when user has not uploaded a resume', function (): void
+{
+    $this->testUser->update(attributes: [
+        'cv_filename' => null,
+        'cv_content'  => null,
+    ]);
+
+    $this->testUser->fresh();
+
+    OpenAI::fake(
+        responses: [fakeOpenAiResponse(content: fake()->sentence())]
+    );
+
+    $formData = [
+        'form.name'            => fake()->name(),
+        'form.job_title'       => fake()->jobTitle(),
+        'form.job_description' => fake()->paragraphs(nb: 5, asText: true),
+        'form.company'         => fake()->company(),
+        'form.manager'         => fake()->name(),
+    ];
+
+    Livewire::actingAs(user: $this->testUser)
+        ->test(name: Index::class)
+        ->set($formData)
+        ->call(method: 'submit')
+        ->assertDispatched(
+            event   : 'toast-show',
+            duration: 3500,
+            slots   : [
+                'text' => trans(key: 'generator.form.resume.error.missing'),
+            ],
+            dataset : [
+                'variant'  => 'danger',
+            ]
+        );
+});
+
+it('fills in form data from Session on page load', function (): void
+{
+    $sessionData = [
+        'name'            => fake()->name(),
+        'job_title'       => fake()->jobTitle(),
+        'job_description' => fake()->paragraphs(nb: 5, asText: true),
+        'company'         => fake()->company(),
+        'manager'         => fake()->name(),
+    ];
+
+    Session::put('letter', $sessionData);
+
+    Livewire::actingAs(user: $this->testUser)
+        ->test(name: Index::class)
+        ->assertSet(name: 'form.name', value: $sessionData['name'])
+        ->assertSet(name: 'form.job_title', value: $sessionData['job_title'])
+        ->assertSet(name: 'form.job_description', value: $sessionData['job_description'])
+        ->assertSet(name: 'form.company', value: $sessionData['company'])
+        ->assertSet(name: 'form.manager', value: $sessionData['manager']);
+});

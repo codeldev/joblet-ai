@@ -47,7 +47,7 @@ final class GenerateAction implements GenerateActionInterface
                 );
             }
 
-            $asset = DB::transaction(callback: fn (): ?Generated => $this->storeGeneratedResponse(
+            $asset = DB::transaction(callback: fn (): Generated => $this->storeGeneratedResponse(
                 settings  : $settings,
                 output    : $letterContent,
                 tokensUsed: $usedTokens
@@ -89,17 +89,13 @@ final class GenerateAction implements GenerateActionInterface
     /**
      * @param  array<string, mixed>  $settings
      */
-    private function storeGeneratedResponse(array $settings, string $output, int $tokensUsed): ?Generated
+    private function storeGeneratedResponse(array $settings, string $output, int $tokensUsed): Generated
     {
         $settings['generated_content_raw']  = $output;
         $settings['generated_content_html'] = nl2br(string: $output);
 
+        /** @var User $user */
         $user = auth()->user();
-
-        if (! $user instanceof User)
-        {
-            return null;
-        }
 
         /** @var Generated $asset */
         $asset = $user->generated()

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Livewire\Generator;
 
-use App\Actions\Generator\GenerateAction;
 use App\Concerns\HasNotificationsTrait;
+use App\Contracts\Actions\Generator\GenerateActionInterface;
 use App\Enums\DateFormatEnum;
 use App\Enums\LanguageEnum;
 use App\Enums\LetterCreativityEnum;
@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Throwable;
 
 final class Index extends Component
 {
@@ -109,9 +110,19 @@ final class Index extends Component
             return;
         }
 
-        $this->generate();
+        try
+        {
+            $this->generate();
+        }
+        catch (Throwable $e)
+        {
+            $this->letterGenerationFailed(
+                message: $e->getMessage(),
+            );
+        }
     }
 
+    /** @throws Throwable */
     public function generate(): void
     {
         $this->form->clearValidation();
@@ -123,7 +134,7 @@ final class Index extends Component
 
         $this->generating = true;
 
-        (new GenerateAction)->handle(
+        app()->make(abstract: GenerateActionInterface::class)->handle(
             settings: $settings,
             success : fn (Generated $generated) => $this->letterGenerationSuccess(
                 generated: $generated

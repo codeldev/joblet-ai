@@ -35,6 +35,20 @@ describe(description: 'ProductPackageEnum', tests: function (): void
             ->toBe(expected: [2, 3, 4]);
     });
 
+    it('getAllWIthFree returns a Collection of all product objects (including INTRODUCTION)', function (): void
+    {
+        $all = ProductPackageEnum::getAllWIthFree();
+
+        expect(value: $all)
+            ->toBeInstanceOf(class: Collection::class)
+            ->and(value: $all->count())
+            ->toBe(expected: 4);
+
+        $ids = $all->pluck(value: 'id')->all();
+        expect(value: $ids)
+            ->toBe(expected: [1, 2, 3, 4]);
+    });
+
     it('product returns correct structure for each case', function (): void
     {
         collect(value: ProductPackageEnum::cases())->each(callback: function ($case): void
@@ -47,12 +61,18 @@ describe(description: 'ProductPackageEnum', tests: function (): void
                 ->toBe(expected: $case->value)
                 ->and(value: $product->title)
                 ->toBeString()
+                ->and(value: $product->subtitle)
+                ->toBeString()
                 ->and(value: $product->description)
                 ->toBeString()
                 ->and(value: $product->credits)
                 ->toBeInt()
                 ->and(value: $product->stripe_id)
                 ->toBeString()
+                ->and(value: $product->frequency)
+                ->toBeString()
+                ->and(value: $product->benefits)
+                ->toBeArray()
                 ->and(value: $product->meta)
                 ->toBeObject()
                 ->and(value: $product->meta->color)
@@ -72,6 +92,18 @@ describe(description: 'ProductPackageEnum', tests: function (): void
     {
         collect(value: ProductPackageEnum::cases())
             ->each(callback: fn ($case) => expect(value: $case->title())->toBeString());
+    });
+
+    it('subTitle returns a string for each case', function (): void
+    {
+        collect(value: ProductPackageEnum::cases())
+            ->each(callback: fn ($case) => expect(value: $case->subTitle())->toBeString());
+    });
+
+    it('frequency returns a string for each case', function (): void
+    {
+        collect(value: ProductPackageEnum::cases())
+            ->each(callback: fn ($case) => expect(value: $case->frequency())->toBeString());
     });
 
     it('description returns a string for each case', function (): void
@@ -114,5 +146,23 @@ describe(description: 'ProductPackageEnum', tests: function (): void
     {
         collect(value: ProductPackageEnum::cases())
             ->each(callback: fn ($case) => expect(value: $case->stripeId())->toBeString());
+    });
+
+    it('benefits returns an array of strings for each case', function (): void
+    {
+        collect(value: ProductPackageEnum::cases())->each(callback: function ($case): void
+        {
+            $benefits = $case->benefits();
+
+            expect(value: $benefits)
+                ->toBeArray()
+                ->and(value: count($benefits))
+                ->toBeGreaterThanOrEqual(expected: 3);
+
+            foreach ($benefits as $benefit)
+            {
+                expect(value: $benefit)->toBeString();
+            }
+        });
     });
 });

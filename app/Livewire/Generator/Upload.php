@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Livewire\Generator;
 
-use App\Actions\Generator\UploadAction;
 use App\Concerns\HasNotificationsTrait;
+use App\Contracts\Actions\Generator\UploadActionInterface;
 use App\Models\User;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -59,7 +60,7 @@ final class Upload extends Component
     }
 
     #[On('process-resume-upload')]
-    public function processUpload(UploadAction $action): void
+    public function processUpload(): void
     {
         if (! $this->file instanceof TemporaryUploadedFile)
         {
@@ -72,15 +73,24 @@ final class Upload extends Component
             return;
         }
 
-        $action->handle(
-            file    : $this->file,
-            success : fn (string $fileName) => $this->successfulUpload(
-                fileName: $fileName
-            ),
-            failed  : fn (string $error) => $this->notifyError(
-                message: $error
-            )
-        );
+        try
+        {
+            app()->make(abstract: UploadActionInterface::class)->handle(
+                file   : $this->file,
+                success: fn (string $fileName) => $this->successfulUpload(
+                    fileName: $fileName
+                ),
+                failed : fn (string $error) => $this->notifyError(
+                    message: $error
+                )
+            );
+        }
+        catch (BindingResolutionException $e)
+        {
+            $this->notifyError(
+                message: $e->getMessage()
+            );
+        }
 
         $this->processing = false;
     }
