@@ -47,7 +47,7 @@ return [
     // User Prompt Generation
     'user.info.name'                 => 'Full name: :name',
     'user.info.job.title'            => 'Job title: :title',
-    'user.info.job.description'      => 'Job description & requirements: :description',
+    'user.info.job.description'      => 'Job description & requirements',
     'user.info.company'              => 'Company name: :name',
     'user.info.manager'              => 'Hiring Managers name: :name',
     'user.info.problem'              => 'Challenge problem: :value',

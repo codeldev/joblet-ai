@@ -97,3 +97,13 @@ if (! function_exists(function: 'generateRandomNumbers'))
         return array_slice(array: $numbers, offset: 0, length: $take);
     }
 }
+
+if (! function_exists(function: 'cleanNl2br'))
+{
+    function cleanNl2br(string $string): string
+    {
+        return nl2br(string: str(string: $string)
+            ->replaceMatches(pattern: "/\n\n/", replace: "\n")
+            ->toString());
+    }
+}

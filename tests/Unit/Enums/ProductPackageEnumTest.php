@@ -13,10 +13,12 @@ describe(description: 'ProductPackageEnum', tests: function (): void
     {
         expect(value: ProductPackageEnum::INTRODUCTION->value)
             ->toBe(expected: 1)
-            ->and(value: ProductPackageEnum::STANDARD->value)
+            ->and(value: ProductPackageEnum::PACKAGE_A->value)
             ->toBe(expected: 2)
-            ->and(value: ProductPackageEnum::EXTENDED->value)
-            ->toBe(expected: 3);
+            ->and(value: ProductPackageEnum::PACKAGE_B->value)
+            ->toBe(expected: 3)
+            ->and(value: ProductPackageEnum::PACKAGE_C->value)
+            ->toBe(expected: 4);
     });
 
     it('getAll returns a Collection of product objects (excluding INTRODUCTION)', function (): void
@@ -26,11 +28,11 @@ describe(description: 'ProductPackageEnum', tests: function (): void
         expect(value: $all)
             ->toBeInstanceOf(class: Collection::class)
             ->and(value: $all->count())
-            ->toBe(expected: 2);
+            ->toBe(expected: 3);
 
         $ids = $all->pluck(value: 'id')->all();
         expect(value: $ids)
-            ->toBe(expected: [2, 3]);
+            ->toBe(expected: [2, 3, 4]);
     });
 
     it('product returns correct structure for each case', function (): void

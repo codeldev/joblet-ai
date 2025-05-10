@@ -13,7 +13,7 @@ final class TestInvalidPackageProcessor implements PaymentProcessorInterface
 
     public function getChargeData(): ?array
     {
-        $package = ProductPackageEnum::STANDARD;
+        $package = ProductPackageEnum::PACKAGE_A;
 
         return [
             'gateway' => 'stripe',

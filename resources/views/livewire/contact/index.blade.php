@@ -1,23 +1,23 @@
 <flux:modal
     name="contact-form"
-    class="w-full max-w-lg"
+    class="w-full max-w-xl space-y-5"
     wire:close="close"
     wire:cancel="close"
     wire:init="onLoad"
 >
-    <div class="mb-4">
+    <div>
         <flux:heading
-            size="lg"
-            class="flex items-center gap-2"
+            size="xl"
+            class="flex items-center gap-2 max-md:!text-lg"
         >
-            <flux:icon.mail class="size-5" />
-            <span>{{ trans('messages.contact.title') }}</span>
+            <flux:icon.mail class="max-md:size-6 size-8" />
+            {{ trans('messages.contact.title') }}
         </flux:heading>
         <flux:subheading class="leading-relaxed">
             {{ trans("messages.contact.description") }}
         </flux:subheading>
     </div>
-
+    <flux:separator />
     <form wire:submit="submit">
         <div class="space-y-4 mb-6">
             <flux:input

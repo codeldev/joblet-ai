@@ -16,7 +16,7 @@ abstract class Prompt
     {
         /** @var User $user */
         $user = auth()->user();
-        
+
         $this->user = $user;
     }
 

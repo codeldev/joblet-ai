@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 return [
     'title'                                   => 'Create your Letter',
-    'description'                             => 'Simply enter the details as shown on the form and click the Generate Letter button. For additional options and AI settings, click the two menu options to the top right of the form.',
+    'description'                             => 'Simply enter your details and click the Generate Letter button. For more custom control, add to the content options and change AI settings as required.',
     'menu'                                    => 'Create Letter',
     'clear.form'                              => 'Clear form & Reset options',
     'download.failed'                         => 'Unable to download right now. Try later.',
@@ -35,7 +35,7 @@ return [
     'letter.settings.title'                   => 'AI Settings',
     'letter.settings.description'             => 'Tweak the settings available to get your desired output',
     // Resume File Uploads
-    'form.resume.stored'                      => 'Current file: :filename. Upload a new one if necessary.',
+    'form.resume.stored'                      => 'Using your current resume/CV on file. Upload a new one if necessary.',
     'form.resume.upload.success'              => 'Your file has been processed!',
     'form.resume.upload.failed'               => 'Your file failed to process correctly. Please try again.',
     'form.resume.error.missing'               => 'Please upload a CV/Resume PDF File',

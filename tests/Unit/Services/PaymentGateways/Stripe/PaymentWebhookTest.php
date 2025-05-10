@@ -16,7 +16,7 @@ beforeEach(closure: function (): void
 {
     $this->app->register(provider: TestServiceProvider::class);
 
-    $this->package = ProductPackageEnum::STANDARD;
+    $this->package = ProductPackageEnum::PACKAGE_A;
     $this->user    = testUser();
 
     $validPayload = [

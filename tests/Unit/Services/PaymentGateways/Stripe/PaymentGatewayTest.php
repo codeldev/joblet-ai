@@ -13,7 +13,7 @@ beforeEach(function (): void
 {
     $this->currency = 'gbp';
     $this->user     = testUser();
-    $this->package  = ProductPackageEnum::STANDARD;
+    $this->package  = ProductPackageEnum::PACKAGE_A;
     $this->gateway  = new PaymentGateway(
         package: $this->package,
         user   : $this->user

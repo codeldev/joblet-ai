@@ -1,8 +1,8 @@
 @props(['creditsRequired'])
-<div class="w-full flex flex-col-reverse xs:flex-row items-center justify-end gap-4">
+<div class="w-full flex flex-col-reverse sm:flex-row items-center justify-between gap-4">
     <flux:button
-        variant="ghost"
-        class="h-11 max-xs:w-full"
+        variant="outline"
+        class="h-11 max-sm:w-full"
         icon="pen-off"
         wire:click="clearForm"
     >

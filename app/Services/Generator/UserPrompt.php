@@ -83,9 +83,7 @@ final class UserPrompt extends Prompt
             trans(key: 'prompt.user.info.language', replace: [
                 'lang' => $languageVariant->label(),
             ]),
-            trans(key: 'prompt.user.info.job.description', replace: [
-                'description' => $jobDescription,
-            ]),
+            trans(key: 'prompt.user.info.job.description') . PHP_EOL . PHP_EOL . $jobDescription,
         ];
 
         return $this;

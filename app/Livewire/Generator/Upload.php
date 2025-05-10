@@ -61,7 +61,7 @@ final class Upload extends Component
     #[On('process-resume-upload')]
     public function processUpload(UploadAction $action): void
     {
-        if ($this->file === null) 
+        if (! $this->file instanceof TemporaryUploadedFile)
         {
             $this->notifyError(
                 message: trans(key: 'generator.form.resume.upload.no.file')
@@ -71,7 +71,7 @@ final class Upload extends Component
 
             return;
         }
-        
+
         $action->handle(
             file    : $this->file,
             success : fn (string $fileName) => $this->successfulUpload(

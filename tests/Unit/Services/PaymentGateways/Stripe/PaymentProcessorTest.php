@@ -17,7 +17,7 @@ use Tests\Classes\Unit\Services\PaymentGateways\Stripe\TestStripeService;
 beforeEach(function (): void
 {
     $this->user          = testUser();
-    $this->package       = ProductPackageEnum::STANDARD;
+    $this->package       = ProductPackageEnum::PACKAGE_A;
     $this->paymentToken  = "token_{$this->user->id}_{$this->package->value}";
     $this->eventId       = 'evt_' . uniqid(prefix: 'test', more_entropy: true);
     $this->paymentIntent = 'pi_' . uniqid(prefix: 'test', more_entropy: true);

@@ -41,7 +41,7 @@ return new class extends Migration
             $table->mediumText(column: 'growth_interest_text')
                 ->nullable();
 
-            $table->mediumText(column: '$unique_value_text')
+            $table->mediumText(column: 'unique_value_text')
                 ->nullable();
 
             $table->mediumText(column: 'achievements_text')

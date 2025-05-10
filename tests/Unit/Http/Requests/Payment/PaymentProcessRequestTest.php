@@ -44,7 +44,7 @@ it('handles invalid gateway with error message', function (): void
     $request = new PaymentProcessRequest;
     $request->merge(input: [
         'gateway' => 'invalid_gateway',
-        'package' => ProductPackageEnum::STANDARD->value,
+        'package' => ProductPackageEnum::PACKAGE_A->value,
     ]);
 
     $response = $request->__invoke();
@@ -63,7 +63,7 @@ it('handles null gateway with error message', function (): void
 {
     $request = new PaymentProcessRequest;
     $request->merge(input: [
-        'package' => ProductPackageEnum::STANDARD->value,
+        'package' => ProductPackageEnum::PACKAGE_A->value,
     ]);
 
     $response = $request->__invoke();
@@ -83,7 +83,7 @@ it('handles non-string gateway with error message', function (): void
     $request = new PaymentProcessRequest;
     $request->merge(input: [
         'gateway' => 123,
-        'package' => ProductPackageEnum::STANDARD->value,
+        'package' => ProductPackageEnum::PACKAGE_A->value,
     ]);
 
     $response = $request->__invoke();
@@ -123,7 +123,7 @@ it('tests buildPaymentLink method with reflection - no process method', function
     App::instance(
         abstract: TestProcessorWithoutProcess::class,
         instance: new TestProcessorWithoutProcess(
-            package: ProductPackageEnum::STANDARD,
+            package: ProductPackageEnum::PACKAGE_A,
             user   : null
         )
     );
@@ -133,7 +133,7 @@ it('tests buildPaymentLink method with reflection - no process method', function
     $buildPaymentLinkMethod->setAccessible(accessible: true);
 
     $result = $buildPaymentLinkMethod
-        ->invoke(new PaymentProcessRequest, TestProcessorWithoutProcess::class, ProductPackageEnum::STANDARD);
+        ->invoke(new PaymentProcessRequest, TestProcessorWithoutProcess::class, ProductPackageEnum::PACKAGE_A);
 
     expect(value: $result)
         ->toBeNull();
@@ -144,7 +144,7 @@ it('tests buildPaymentLink method with reflection - null process result', functi
     App::instance(
         abstract: TestProcessorWithNullProcess::class,
         instance: new TestProcessorWithNullProcess(
-            package: ProductPackageEnum::STANDARD,
+            package: ProductPackageEnum::PACKAGE_A,
             user   : null
         )
     );
@@ -156,7 +156,7 @@ it('tests buildPaymentLink method with reflection - null process result', functi
     $buildPaymentLinkMethod->setAccessible(accessible: true);
 
     $result = $buildPaymentLinkMethod
-        ->invoke($request, TestProcessorWithNullProcess::class, ProductPackageEnum::STANDARD);
+        ->invoke($request, TestProcessorWithNullProcess::class, ProductPackageEnum::PACKAGE_A);
 
     expect(value: $result)->toBeNull();
 });
@@ -166,7 +166,7 @@ it('tests buildPaymentLink method with reflection - valid process result', funct
     App::instance(
         abstract: TestProcessorWithValidProcess::class,
         instance: new TestProcessorWithValidProcess(
-            package: ProductPackageEnum::STANDARD,
+            package: ProductPackageEnum::PACKAGE_A,
             user   : null
         )
     );
@@ -176,7 +176,7 @@ it('tests buildPaymentLink method with reflection - valid process result', funct
     $buildPaymentLinkMethod->setAccessible(accessible: true);
 
     $result = $buildPaymentLinkMethod
-        ->invoke(new PaymentProcessRequest, TestProcessorWithValidProcess::class, ProductPackageEnum::STANDARD);
+        ->invoke(new PaymentProcessRequest, TestProcessorWithValidProcess::class, ProductPackageEnum::PACKAGE_A);
 
     expect(value: $result)
         ->toBe(expected: 'https://example.com/payment');
@@ -187,7 +187,7 @@ it('tests buildPaymentLink method with reflection - empty string process result'
     $emptyProcessorClass = 'App\\Tests\\EmptyStringProcessor';
 
     $emptyProcessor = new TestEmptyStringProcessor(
-        package: ProductPackageEnum::STANDARD,
+        package: ProductPackageEnum::PACKAGE_A,
         user: testUser()
     );
 
@@ -206,7 +206,7 @@ it('tests buildPaymentLink method with reflection - empty string process result'
     );
 
     $result  = $buildPaymentLinkMethod
-        ->invoke(new PaymentProcessRequest, $emptyProcessorClass, ProductPackageEnum::STANDARD);
+        ->invoke(new PaymentProcessRequest, $emptyProcessorClass, ProductPackageEnum::PACKAGE_A);
 
     expect(value: $result)
         ->toBe(expected: '')
@@ -217,7 +217,7 @@ it('tests buildPaymentLink method with reflection - empty string process result'
 it('tests null payment URL scenario', function (): void
 {
     $processor = new TestProcessorWithNullProcess(
-        package: ProductPackageEnum::STANDARD,
+        package: ProductPackageEnum::PACKAGE_A,
         user   : testUser()
     );
 
@@ -228,7 +228,7 @@ it('tests null payment URL scenario', function (): void
 
     $mockRequest = Mockery::mock(PaymentProcessInterface::class);
     $mockRequest->shouldReceive(methodNames: 'getGateway')->andReturn('stripe');
-    $mockRequest->shouldReceive(methodNames: 'getPackage')->andReturn(ProductPackageEnum::STANDARD);
+    $mockRequest->shouldReceive(methodNames: 'getPackage')->andReturn(ProductPackageEnum::PACKAGE_A);
     $mockRequest->shouldReceive(methodNames: 'paymentError')->andReturnUsing(function ($message)
     {
         Session::put('payment-error', $message);
@@ -253,7 +253,7 @@ it('tests null payment URL scenario', function (): void
 it('tests successful payment URL redirect', function (): void
 {
     $processor = new TestProcessorWithValidProcess(
-        package: ProductPackageEnum::STANDARD,
+        package: ProductPackageEnum::PACKAGE_A,
         user   : testUser()
     );
 
@@ -277,7 +277,7 @@ it('tests successful payment URL redirect', function (): void
 it('handles empty payment URL with error message', function (): void
 {
     $emptyProcessor = new TestEmptyPaymentUrlProcessor(
-        package: ProductPackageEnum::STANDARD,
+        package: ProductPackageEnum::PACKAGE_A,
         user: testUser()
     );
 
@@ -288,7 +288,7 @@ it('handles empty payment URL with error message', function (): void
 
     $mockRequest = Mockery::mock(PaymentProcessInterface::class);
     $mockRequest->shouldReceive(methodNames: 'getGateway')->andReturn('stripe');
-    $mockRequest->shouldReceive(methodNames: 'getPackage')->andReturn(ProductPackageEnum::STANDARD);
+    $mockRequest->shouldReceive(methodNames: 'getPackage')->andReturn(ProductPackageEnum::PACKAGE_A);
     $mockRequest->shouldReceive(methodNames: 'paymentError')->andReturnUsing(function ($message)
     {
         Session::put('payment-error', $message);
@@ -353,11 +353,11 @@ it('tests getGateway method returns gateway string', function (): void
 it('tests getPackage method returns ProductPackageEnum', function (): void
 {
     $request = (new PaymentProcessRequest)->merge(input: [
-        'package' => ProductPackageEnum::STANDARD->value,
+        'package' => ProductPackageEnum::PACKAGE_A->value,
     ]);
 
     expect(value: $request->getPackage())
-        ->toBe(expected: ProductPackageEnum::STANDARD);
+        ->toBe(expected: ProductPackageEnum::PACKAGE_A);
 });
 
 it('tests getPackage method throws exception for non-numeric package', function (): void
@@ -379,7 +379,7 @@ it('tests getPackage method throws exception for null package', function (): voi
 it('tests empty payment URL with notEmpty helper', function (): void
 {
     $emptyProcessor = new TestProcessorWithEmptyProcess(
-        package: ProductPackageEnum::STANDARD,
+        package: ProductPackageEnum::PACKAGE_A,
         user   : testUser()
     );
 
@@ -393,7 +393,7 @@ it('tests empty payment URL with notEmpty helper', function (): void
 
     $request = (new PaymentProcessRequest)->merge(input: [
         'gateway' => 'stripe',
-        'package' => ProductPackageEnum::STANDARD->value,
+        'package' => ProductPackageEnum::PACKAGE_A->value,
     ]);
 
     $response = $request->__invoke();
@@ -411,7 +411,7 @@ it('tests empty payment URL with notEmpty helper', function (): void
 it('tests a successful payment URL redirect', function (): void
 {
     $validProcessor = new TestProcessorWithValidProcess(
-        package: ProductPackageEnum::STANDARD,
+        package: ProductPackageEnum::PACKAGE_A,
         user   : testUser()
     );
 
@@ -425,7 +425,7 @@ it('tests a successful payment URL redirect', function (): void
 
     $request = (new PaymentProcessRequest)->merge(input: [
         'gateway' => 'stripe',
-        'package' => ProductPackageEnum::STANDARD->value,
+        'package' => ProductPackageEnum::PACKAGE_A->value,
     ]);
 
     $response = $request->__invoke();
@@ -487,7 +487,7 @@ it('tests authorize method always returns true', function (): void
 it('tests buildPaymentLink method with processor that has no process method', function (): void
 {
     $processor = new TestProcessorWithoutProcessMethod(
-        package: ProductPackageEnum::STANDARD,
+        package: ProductPackageEnum::PACKAGE_A,
         user: null
     );
 
@@ -506,7 +506,7 @@ it('tests buildPaymentLink method with processor that has no process method', fu
     $result = $buildPaymentLinkMethod->invoke(
         new PaymentProcessRequest,
         TestProcessorWithoutProcessMethod::class,
-        ProductPackageEnum::STANDARD
+        ProductPackageEnum::PACKAGE_A
     );
 
     expect(value: $result)
@@ -517,7 +517,7 @@ it('tests processor match default case', function (): void
 {
     $request = (new PaymentProcessRequest)->merge(input: [
         'gateway' => 'unknown',
-        'package' => ProductPackageEnum::STANDARD->value,
+        'package' => ProductPackageEnum::PACKAGE_A->value,
     ]);
 
     $response = $request->__invoke();
@@ -535,7 +535,7 @@ it('tests processor match default case', function (): void
 it('tests exception handling in __invoke method', function (): void
 {
     $exceptionProcessor = new TestProcessorWithExceptionProcess(
-        package: ProductPackageEnum::STANDARD,
+        package: ProductPackageEnum::PACKAGE_A,
         user: testUser()
     );
 
@@ -549,7 +549,7 @@ it('tests exception handling in __invoke method', function (): void
 
     $request = (new PaymentProcessRequest)->merge(input: [
         'gateway' => 'stripe',
-        'package' => ProductPackageEnum::STANDARD->value,
+        'package' => ProductPackageEnum::PACKAGE_A->value,
     ]);
 
     $response = $request->__invoke();
@@ -568,7 +568,7 @@ it('tests non-string gateway value', function (): void
 {
     $request = (new PaymentProcessRequest)->merge(input: [
         'gateway' => fake()->randomNumber(),
-        'package' => ProductPackageEnum::STANDARD->value,
+        'package' => ProductPackageEnum::PACKAGE_A->value,
     ]);
 
     $response = $request->__invoke();
@@ -593,7 +593,7 @@ it('tests buildPaymentLink method with method_exists coverage', function (): voi
     $buildPaymentLinkMethod->setAccessible(accessible: true);
 
     $customProcessor = new TestProcessorWithNullProcess(
-        package: ProductPackageEnum::STANDARD,
+        package: ProductPackageEnum::PACKAGE_A,
         user: testUser()
     );
 
@@ -607,7 +607,7 @@ it('tests buildPaymentLink method with method_exists coverage', function (): voi
     $result = $buildPaymentLinkMethod->invoke(
         new PaymentProcessRequest,
         $customProcessorClass,
-        ProductPackageEnum::STANDARD
+        ProductPackageEnum::PACKAGE_A
     );
 
     expect(value: $result)
@@ -617,7 +617,7 @@ it('tests buildPaymentLink method with method_exists coverage', function (): voi
 it('tests method_exists branch in buildPaymentLink with custom processor', function (): void
 {
     $customProcessor = new TestProcessorWithNullReturnProcess(
-        package: ProductPackageEnum::STANDARD,
+        package: ProductPackageEnum::PACKAGE_A,
         user: testUser()
     );
 
@@ -638,7 +638,7 @@ it('tests method_exists branch in buildPaymentLink with custom processor', funct
     $result = $buildPaymentLinkMethod->invoke(
         new PaymentProcessRequest,
         $customProcessorClass,
-        ProductPackageEnum::STANDARD
+        ProductPackageEnum::PACKAGE_A
     );
 
     expect(value: $result)

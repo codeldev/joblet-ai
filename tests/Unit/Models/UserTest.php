@@ -25,6 +25,8 @@ test(description: 'to array', closure: function (): void
         'email',
         'password',
         'remember_token',
+        'cv_filename',
+        'cv_content',
         'stripe_id',
         'pm_type',
         'pm_last_four',

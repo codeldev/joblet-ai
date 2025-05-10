@@ -11,7 +11,6 @@ use App\Enums\LetterCreativityEnum;
 use App\Enums\LetterLengthEnum;
 use App\Enums\LetterToneEnum;
 use App\Livewire\Generator\Index;
-use App\Models\Generated;
 use App\Models\Usage;
 use Illuminate\Support\Facades\DB;
 use OpenAI\Laravel\Facades\OpenAI;
@@ -96,11 +95,11 @@ it('processes the form successfully when submitting with available credits', fun
     );
 
     $formData = [
-        'form.name'       => fake()->name(),
-        'form.job'        => fake()->jobTitle(),
-        'form.company'    => fake()->company(),
-        'form.manager'    => fake()->name(),
-        'form.leave_date' => now()->addDays(value: 60),
+        'form.name'            => fake()->name(),
+        'form.job_title'       => fake()->jobTitle(),
+        'form.job_description' => fake()->paragraphs(nb: 5, asText: true),
+        'form.company'         => fake()->company(),
+        'form.manager'         => fake()->name(),
     ];
 
     Livewire::actingAs(user: $this->testUser)
@@ -124,11 +123,11 @@ it('shows an error when a problem occurs with letter generation', function (): v
     );
 
     $formData = [
-        'form.name'       => fake()->name(),
-        'form.job'        => fake()->jobTitle(),
-        'form.company'    => fake()->company(),
-        'form.manager'    => fake()->name(),
-        'form.leave_date' => now()->addDays(value: 60),
+        'form.name'            => fake()->name(),
+        'form.job_title'       => fake()->jobTitle(),
+        'form.job_description' => fake()->paragraphs(nb: 5, asText: true),
+        'form.company'         => fake()->company(),
+        'form.manager'         => fake()->name(),
     ];
 
     Livewire::actingAs(user: $this->testUser)
@@ -150,35 +149,20 @@ it('shows an error when a problem occurs with letter generation', function (): v
 it('clears the form', function (): void
 {
     $formData = [
-        'form.name'       => fake()->name(),
-        'form.job'        => fake()->jobTitle(),
-        'form.company'    => fake()->company(),
-        'form.manager'    => fake()->name(),
-        'form.leave_date' => now()->addDays(value: 60),
+        'form.name'            => fake()->name(),
+        'form.job_title'       => fake()->jobTitle(),
+        'form.job_description' => fake()->paragraphs(nb: 5, asText: true),
+        'form.company'         => fake()->company(),
+        'form.manager'         => fake()->name(),
     ];
 
     Livewire::actingAs(user: $this->testUser)
         ->test(name: Index::class)
         ->set($formData)
         ->call(method: 'clearForm')
-        ->assertSet(name: 'form.name', value: null)
-        ->assertSet(name: 'form.job', value: null)
+        ->assertSet(name: 'form.name', value: $this->testUser->name)
+        ->assertSet(name: 'form.job_title', value: null)
         ->assertSet(name: 'form.company', value: null)
         ->assertSet(name: 'form.manager', value: null)
-        ->assertSet(name: 'form.leave_date', value: null);
-});
-
-it('fills in form details based on last generated letter', function (): void
-{
-    $generated = Generated::factory()
-        ->for(factory: $this->testUser)
-        ->create();
-
-    Livewire::actingAs(user: $this->testUser)
-        ->test(name: Index::class)
-        ->assertSet(name: 'form.name', value: $generated->name)
-        ->assertSet(name: 'form.job', value: $generated->job)
-        ->assertSet(name: 'form.company', value: $generated->company)
-        ->assertSet(name: 'form.manager', value: $generated->manager)
-        ->assertSet(name: 'form.leave_date', value: $generated->leave_date);
+        ->assertSet(name: 'form.job_description', value: null);
 });

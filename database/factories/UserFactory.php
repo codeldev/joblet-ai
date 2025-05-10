@@ -22,6 +22,8 @@ final class UserFactory extends Factory
             'email'          => str(string: fake()->name())->slug()->toString() . '@gmail.com',
             'password'       => bcrypt(value: 'password'),
             'remember_token' => Str::random(length: 10),
+            'cv_filename'    => Str::random(length: 15) . '.pdf',
+            'cv_content'     => fake()->paragraphs(nb: 8, asText: true),
         ];
     }
 }

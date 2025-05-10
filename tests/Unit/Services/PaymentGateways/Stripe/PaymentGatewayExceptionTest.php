@@ -17,7 +17,7 @@ it('returns null when an API error occurs', function (): void
     });
 
     $gateway = new PaymentGateway(
-        package: ProductPackageEnum::STANDARD,
+        package: ProductPackageEnum::PACKAGE_A,
         user   : testUser()
     );
 

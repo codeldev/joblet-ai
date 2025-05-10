@@ -12,5 +12,6 @@
     @if($this->generations)
         <livewire:dashboard.delete />
         <livewire:dashboard.letter />
+        <livewire:dashboard.settings />
     @endif
 </div>

@@ -10,10 +10,11 @@
                 <livewire:account.credits :generate="false" />
             @endauth
             @include('livewire.generator.form')
+            @include('livewire.generator.settings')
+            @include('livewire.generator.options')
         </div>
     </div>
-    @include('livewire.generator.options')
-    @include('livewire.generator.settings')
     @include('livewire.generator.auth')
     <livewire:dashboard.letter />
+    <x-generator.processing />
 </div>

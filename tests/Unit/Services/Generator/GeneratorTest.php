@@ -9,15 +9,20 @@ use App\Enums\MaxTokensEnum;
 use App\Services\Generator\Generator;
 use Carbon\CarbonImmutable;
 
+use function Pest\Laravel\actingAs;
+
 beforeEach(closure: function (): void
 {
-    $this->generatorName       = fake()->name();
-    $this->generatorJob        = fake()->jobTitle();
-    $this->generatorCompany    = fake()->company();
-    $this->generatorManager    = fake()->name();
-    $this->generatorLeaveDate  = CarbonImmutable::parse(time: '2025-04-25');
-    $this->generatorReason     = 'Career growth';
-    $this->generatorExperience = 'Great team';
+    actingAs(user: testUser());
+
+    $this->generatorName            = fake()->name();
+    $this->generatorJobTitle        = fake()->jobTitle();
+    $this->generatorJobDescription  = fake()->paragraphs(nb: 5, asText: true);
+    $this->generatorCompany         = fake()->company();
+    $this->generatorManager         = fake()->name();
+    $this->generatorLeaveDate       = CarbonImmutable::parse(time: '2025-04-25');
+    $this->generatorReason          = 'Career growth';
+    $this->generatorExperience      = 'Great team';
 });
 
 test(description: 'constructor sets default model', closure: function (): void
@@ -222,24 +227,18 @@ test(description: 'builder includes standard penalty values', closure: function 
 test(description: 'builder passes all settings to prompts', closure: function (): void
 {
     $result = new Generator(settings: [
-        'name'                     => $this->generatorName,
-        'job'                      => $this->generatorJob,
-        'company'                  => $this->generatorCompany,
-        'manager'                  => $this->generatorManager,
-        'leave_date'               => $this->generatorLeaveDate,
-        'leaving_reason'           => true,
-        'leaving_reason_text'      => $this->generatorReason,
-        'positive_experience'      => true,
-        'positive_experience_text' => $this->generatorExperience,
+        'name'            => $this->generatorName,
+        'job_title'       => $this->generatorJobTitle,
+        'job_description' => $this->generatorJobDescription,
+        'company'         => $this->generatorCompany,
+        'manager'         => $this->generatorManager,
     ])->builder();
 
     expect(value: $result['messages'])
         ->toBeArray()
         ->and(value: $result['messages'][1]['content'])
         ->toContain(needles: $this->generatorName)
-        ->toContain(needles: $this->generatorJob)
+        ->toContain(needles: $this->generatorJobTitle)
         ->toContain(needles: $this->generatorCompany)
-        ->toContain(needles: $this->generatorManager)
-        ->toContain(needles: $this->generatorReason)
-        ->toContain(needles: $this->generatorExperience);
+        ->toContain(needles: $this->generatorManager);
 });

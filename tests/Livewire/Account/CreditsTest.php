@@ -23,7 +23,7 @@ it('can render the credits component', function (): void
 
 it('sends for payment when a credit pack is selected', function (): void
 {
-    $package = ProductPackageEnum::STANDARD;
+    $package = ProductPackageEnum::PACKAGE_A;
 
     Livewire::actingAs(user: testUser())
         ->test(name: Credits::class)
@@ -34,7 +34,7 @@ it('sends for payment when a credit pack is selected', function (): void
 
 it('redirects to stripe when sending for payment', function (): void
 {
-    $package = ProductPackageEnum::STANDARD;
+    $package = ProductPackageEnum::PACKAGE_A;
     $route   = route(name: 'payment.request', parameters: [
         'gateway' => 'stripe',
         'package' => $package->value,

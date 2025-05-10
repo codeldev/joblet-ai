@@ -1,8 +1,8 @@
 <div>
-    <div class="fixed z-20 right-0 top-16 sm:top-1/5">
+    <div class="fixed z-20 right-0 top-16 sm:top-20">
         <flux:modal.trigger name="feedback-form">
-            <button type="button" class="h-9 w-8 sm:h-12 sm:w-12 bg-indigo-600 aspect-square rounded-tl-lg rounded-bl-lg text-white flex items-center justify-start pl-2 sm:pl-4 shadow-lg hover:w-28 sm:hover:w-32 opacity-50 hover:opacity-100 ease-in-out duration-150 transition-all cursor-pointer group">
-                <flux:icon.message-circle-more class="size-5 sm:size-6 flex-shrink-0" />
+            <button type="button" class="h-9 w-8 bg-indigo-600 aspect-square rounded-tl-lg rounded-bl-lg text-white flex items-center justify-start pl-2 shadow-lg hover:w-28 opacity-50 hover:opacity-100 ease-in-out duration-150 transition-all cursor-pointer group">
+                <flux:icon.message-circle-more class="size-5 flex-shrink-0" />
                 <span class="text-sm ml-2 opacity-0 w-0 group-hover:opacity-100 group-hover:w-auto overflow-hidden whitespace-nowrap  ease-in-out transition-all duration-150">
                 {{ trans("messages.feedback.trigger") }}
             </span>
@@ -11,22 +11,23 @@
     </div>
     <flux:modal
         name="feedback-form"
-        class="w-full max-w-lg"
+        class="w-full max-w-xl space-y-5"
         wire:close="close"
         wire:cancel="close"
     >
-        <div class="mb-4">
+        <div>
             <flux:heading
-                size="lg"
-                class="flex items-center gap-2"
+                size="xl"
+                class="flex items-center gap-2 max-md:!text-lg"
             >
-                <flux:icon.message-circle-more class="size-5" />
-                <span>{{ trans('messages.feedback.title') }}</span>
+                <flux:icon.message-circle-more class="max-md:size-6 size-8" />
+                {{ trans('messages.feedback.title') }}
             </flux:heading>
             <flux:subheading class="leading-relaxed space-y-4">
-                {{ trans('messages.feedback.description') }}
+                {{ trans("messages.feedback.description") }}
             </flux:subheading>
         </div>
+        <flux:separator />
         <form wire:submit="submit">
             <div class="space-y-4 mb-6">
                 <flux:input

@@ -1,4 +1,4 @@
-<div class="text-center xs:text-left">
+<div class="text-center md:text-left">
     <flux:heading size="lg">
         {{ trans('generator.form.title') }}
     </flux:heading>

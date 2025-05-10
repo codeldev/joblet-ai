@@ -21,17 +21,10 @@
         </flux:menu.item>
         <flux:menu.separator />
         <flux:menu.item
-            icon="adjustments-horizontal"
-            x-on:click="displaySettings"
+            icon="cog"
+            wire:click="$dispatch('dashboard-view-settings', { generated: '{{ $generation->id }}'})"
         >
             {{ trans('letter.menu.settings') }}
-        </flux:menu.item>
-        <flux:menu.separator />
-        <flux:menu.item
-            icon="cog"
-            x-on:click="displayOptions"
-        >
-            {{ trans('letter.menu.options') }}
         </flux:menu.item>
         <flux:menu.separator />
         <flux:menu.item

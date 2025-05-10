@@ -15,11 +15,11 @@ use App\Livewire\Dashboard\Letter;
 use App\Livewire\Forms\Generator\GeneratorForm;
 use App\Models\Generated;
 use App\Models\User;
-use App\Services\Models\GeneratedService;
 use App\Services\Models\UserService;
 use Flux\Flux;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -30,11 +30,13 @@ final class Index extends Component
 
     public GeneratorForm $form;
 
+    public bool $generating = false;
+
     public function mount(): void
     {
         if (Auth::check())
         {
-            $this->fillFromLastAsset();
+            $this->fillFromSession();
             $this->setNameIfNotFilled();
         }
     }
@@ -114,9 +116,13 @@ final class Index extends Component
     {
         $this->form->clearValidation();
 
+        /** @var array<string, mixed> $settings */
         $settings = $this->form->validate();
 
-        /** @var array<string,mixed> $settings */
+        Session::put('letter', $settings);
+
+        $this->generating = true;
+
         (new GenerateAction)->handle(
             settings: $settings,
             success : fn (Generated $generated) => $this->letterGenerationSuccess(
@@ -132,23 +138,19 @@ final class Index extends Component
     {
         $this->form->reset();
         $this->form->clearValidation();
+
+        Session::forget(keys: 'letter');
+
+        $this->setNameIfNotFilled();
     }
 
-    private function fillFromLastAsset(): void
+    private function fillFromSession(): void
     {
-        /** @var User|null $user */
-        $user = auth()->user();
-
-        if ($user instanceof User)
+        if (Session::exists(key: 'letter'))
         {
-            $asset = $user->generated()->latest()->first();
-
-            if ($asset instanceof Generated)
-            {
-                $this->form->fill(
-                    values: GeneratedService::getFillable(asset: $asset)
-                );
-            }
+            $this->form->fill(
+                values: Session::get(key: 'letter')
+            );
         }
     }
 
@@ -160,6 +162,11 @@ final class Index extends Component
         if ($user instanceof User && ! notEmpty(value: $this->form->name))
         {
             $this->form->name = $user->name;
+
+            Session::put(
+                key  : 'letter.name',
+                value: $this->form->name
+            );
         }
     }
 
@@ -197,11 +204,15 @@ final class Index extends Component
 
     private function letterGenerationFailed(string $message): void
     {
+        $this->generating = false;
+
         $this->notifyError(message: $message);
     }
 
     private function letterGenerationSuccess(Generated $generated): void
     {
+        $this->generating = false;
+
         $this->dispatch(event: 'reload-credits-panel');
         $this->dispatch(event: 'generator-credits-check');
 
@@ -219,7 +230,7 @@ final class Index extends Component
         /** @var User|null $user */
         $user = auth()->user();
 
-        if ($user instanceof User && ! notEmpty(value: $user->cv_content))
+        if ($user instanceof User && notEmpty(value: $user->cv_content))
         {
             return true;
         }

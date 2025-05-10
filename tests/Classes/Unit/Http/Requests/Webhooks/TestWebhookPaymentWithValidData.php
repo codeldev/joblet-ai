@@ -21,7 +21,7 @@ final class TestWebhookPaymentWithValidData implements PaymentWebhookInterface
     {
         return [
             'user'    => new User,
-            'package' => ProductPackageEnum::STANDARD,
+            'package' => ProductPackageEnum::PACKAGE_A,
             'amount'  => 100,
             'gateway' => 'stripe',
         ];

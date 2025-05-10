@@ -14,13 +14,13 @@ use App\Services\Models\UserService;
 beforeEach(function (): void
 {
     $this->testUser         = testUser();
-    $this->totalCredits     = 22;
+    $this->totalCredits     = 37;
     $this->usedCredits      = 5;
     $this->availableCredits = ($this->totalCredits - $this->usedCredits);
 
     $products = [
-        ProductPackageEnum::STANDARD,
-        ProductPackageEnum::EXTENDED,
+        ProductPackageEnum::PACKAGE_A,
+        ProductPackageEnum::PACKAGE_B,
     ];
 
     collect(value: $products)->each(callback: function (ProductPackageEnum $package): void

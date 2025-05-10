@@ -1,25 +1,20 @@
-<flux:modal
-    name="letter-settings"
-    variant="flyout"
-    position="left"
-    class="max-w-sm sm:max-w-md md:max-w-lg !p-6 lg:!p-8 shadow-lg"
->
-    <div class="space-y-4 small-description">
-        <div>
-            <flux:heading
-                size="xl"
-                class="flex items-center gap-2"
-            >
-                <flux:icon.adjustments-horizontal class="size-8" />
-                {{ trans('generator.letter.settings.title') }}
-            </flux:heading>
-            <flux:subheading>
-                {{ trans('generator.letter.settings.description') }}
-            </flux:subheading>
-        </div>
+<flux:card class="p-5 sm:p-6 space-y-4 scroll-mt-20" x-ref="settings">
+    <div>
+        <flux:heading
+            size="lg"
+            class="flex items-center gap-2"
+        >
+            <flux:icon.adjustments-horizontal class="size-5" />
+            {{ trans('generator.letter.settings.title') }}
+        </flux:heading>
+        <flux:subheading>
+            {{ trans('generator.letter.settings.description') }}
+        </flux:subheading>
+    </div>
 
-        <flux:separator variant="subtle" />
+    <flux:separator variant="subtle" />
 
+    <div class="flex flex-col gap-6">
         <div class="space-y-5">
             <flux:radio.group
                 wire:model.integer="form.option_creativity"
@@ -37,7 +32,7 @@
                 @endforeach
             </flux:radio.group>
             <flux:badge
-                color="purple"
+                color="fuchsia"
                 class="w-full !font-normal !p-2.5 justify-center !whitespace-normal"
             >
                 @foreach($this->creativityOptions as $creativityId => $creativityDetails)
@@ -47,9 +42,7 @@
                 @endforeach
             </flux:badge>
         </div>
-
-        <flux:separator variant="subtle" />
-
+        <flux:separator />
         <div class="space-y-5">
             <flux:radio.group
                 wire:model.integer="form.option_tone"
@@ -67,7 +60,7 @@
                 @endforeach
             </flux:radio.group>
             <flux:badge
-                color="purple"
+                color="fuchsia"
                 class="w-full !font-normal !p-2.5 justify-center !whitespace-normal"
             >
                 @foreach($this->toneOptions as $toneId => $toneDetails)
@@ -77,9 +70,7 @@
                 @endforeach
             </flux:badge>
         </div>
-
-        <flux:separator variant="subtle" />
-
+        <flux:separator />
         <div class="space-y-5">
             <flux:radio.group
                 wire:model.integer="form.option_length"
@@ -97,7 +88,7 @@
                 @endforeach
             </flux:radio.group>
             <flux:badge
-                color="purple"
+                color="fuchsia"
                 class="w-full !font-normal !p-2.5 justify-center !whitespace-normal"
             >
                 @foreach($this->lengthOptions as $lengthId => $lengthDetails)
@@ -108,4 +99,4 @@
             </flux:badge>
         </div>
     </div>
-</flux:modal>
+</flux:card>

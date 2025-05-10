@@ -4,13 +4,10 @@
             {{ trans('generator.form.resume.title') }}
         </flux:label>
         <flux:description>
-            @if($fileName)
-                {!! trans('generator.form.resume.stored', [
-                    'filename' => '<span class="text-theme-700 dark:text-theme-400/80">' . $fileName . '</span>'
-                ]) !!}
-            @else
-                {{ trans('generator.form.resume.description') }}
-            @endif
+            {{ $fileName
+                ? trans('generator.form.resume.stored')
+                : trans('generator.form.resume.description')
+            }}
         </flux:description>
     </div>
     <div
@@ -26,10 +23,22 @@
         wire:show="!processing"
         wire:cloak
     >
-        <flux:input
-            type="file"
-            wire:model.live="file"
-            accept=".pdf" />
+        <div class="flex flex-col-reverse md:flex-row items-center gap-4">
+            <div class="grow w-full md:w-auto">
+                <flux:input
+                    type="file"
+                    wire:model.live="file"
+                    accept=".pdf"
+                />
+            </div>
+            @if($fileName)
+                <div class="grow w-full">
+                    <flux:badge color="emerald" class="w-full h-10 pl-3 line-clamp-1 !text-sm" icon="paperclip">
+                        <div class="truncate">{{ $fileName }}</div>
+                    </flux:badge>
+                </div>
+            @endif
+        </div>
         <flux:error name="file" />
     </div>
 </flux:field>

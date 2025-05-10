@@ -83,7 +83,7 @@ it(description: 'builds complete invoice data with all components', closure: fun
         ->toBeArray()
         ->toHaveKeys(keys: ['name', 'website', 'email', 'descriptor', 'address'])
         ->and(value: $result['settings']['name'])
-        ->toBe(expected: 'ResignAI')
+        ->toBe(expected: 'JobletAI')
         ->and(value: $result['settings']['website'])
         ->toBe(expected: 'https://joblet.ai')
         ->and(value: $result['settings']['email'])
