@@ -1,4 +1,4 @@
-<flux:card class="space-y-6">
+<flux:card class="space-y-6 !shadow-lg">
     <flux:heading size="lg" class="text-indigo-600 dark:text-indigo-300">
         {{ trans('support.section.support.title') }}
     </flux:heading>

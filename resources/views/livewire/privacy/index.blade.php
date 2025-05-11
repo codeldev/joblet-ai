@@ -4,7 +4,7 @@
         icon="shield-alert"
         :description="trans('privacy.description')"
     />
-    <flux:card class="p-5 sm:p-6 space-y-4">
+    <flux:card class="p-5 sm:p-6 space-y-4 !shadow-lg">
         <flux:heading level="2">
             {{ trans('privacy.a.title') }}
         </flux:heading>
@@ -38,7 +38,7 @@
             </flux:text>
         </div>
     </flux:card>
-    <flux:card class="p-5 sm:p-6 space-y-4">
+    <flux:card class="p-5 sm:p-6 space-y-4 !shadow-lg">
         <flux:heading level="2">
             {{ trans('privacy.b.title') }}
         </flux:heading>
@@ -56,7 +56,7 @@
             </ul>
         </flux:text>
     </flux:card>
-    <flux:card class="p-5 sm:p-6 space-y-4">
+    <flux:card class="p-5 sm:p-6 space-y-4 !shadow-lg">
         <flux:heading level="2">
            {{ trans('privacy.c.title') }}
         </flux:heading>
@@ -70,7 +70,7 @@
             </ul>
         </flux:text>
     </flux:card>
-    <flux:card class="p-5 sm:p-6 space-y-4">
+    <flux:card class="p-5 sm:p-6 space-y-4 !shadow-lg">
         <flux:heading level="2">
             {{ trans('privacy.d.title') }}
         </flux:heading>
@@ -103,7 +103,7 @@
             </flux:text>
         </div>
     </flux:card>
-    <flux:card class="p-5 sm:p-6 space-y-4">
+    <flux:card class="p-5 sm:p-6 space-y-4 !shadow-lg">
         <flux:heading level="2">
             {{ trans('privacy.e.title') }}
         </flux:heading>
@@ -121,7 +121,7 @@
             <p>{{ trans('privacy.e.text.2') }}</p>
         </flux:text>
     </flux:card>
-    <flux:card class="p-5 sm:p-6 space-y-4">
+    <flux:card class="p-5 sm:p-6 space-y-4 !shadow-lg">
         <flux:heading level="2">
             {{ trans('privacy.f.title') }}
         </flux:heading>
@@ -138,7 +138,7 @@
             </flux:text>
         </div>
     </flux:card>
-    <flux:card class="p-5 sm:p-6 space-y-4">
+    <flux:card class="p-5 sm:p-6 space-y-4 !shadow-lg">
         <flux:heading level="2">
             {{ trans('privacy.g.title') }}
         </flux:heading>
@@ -147,7 +147,7 @@
             <p>{{ trans('privacy.g.text') }}</p>
         </flux:text>
     </flux:card>
-    <flux:card class="p-5 sm:p-6 space-y-4">
+    <flux:card class="p-5 sm:p-6 space-y-4 !shadow-lg">
         <flux:heading level="2">
             {{ trans('privacy.h.title') }}
         </flux:heading>
@@ -156,7 +156,7 @@
             <p>{{ trans('privacy.h.text') }}</p>
         </flux:text>
     </flux:card>
-    <flux:card class="p-5 sm:p-6 space-y-4">
+    <flux:card class="p-5 sm:p-6 space-y-4 !shadow-lg">
         <flux:heading level="2">
             {{ trans('privacy.i.title') }}
         </flux:heading>
@@ -165,7 +165,7 @@
             <p>{{ trans('privacy.i.text') }}</p>
         </flux:text>
     </flux:card>
-    <flux:card class="p-5 sm:p-6 space-y-4">
+    <flux:card class="p-5 sm:p-6 space-y-4 !shadow-lg">
         <flux:heading level="2">
             {{ trans('privacy.j.title') }}
         </flux:heading>
@@ -174,7 +174,7 @@
             <p>{{ trans('privacy.j.text') }}</p>
         </flux:text>
     </flux:card>
-    <flux:card class="p-5 sm:p-6 space-y-4">
+    <flux:card class="p-5 sm:p-6 space-y-4 !shadow-lg">
         <flux:heading level="2">
             {{ trans('privacy.k.title') }}
         </flux:heading>
@@ -183,7 +183,7 @@
             <p>{{ trans('privacy.k.text', ['email' => $contact]) }}</p>
         </flux:text>
     </flux:card>
-    <flux:card class="p-5 sm:p-6 space-y-4">
+    <flux:card class="p-5 sm:p-6 space-y-4 !shadow-lg">
         <flux:heading level="2">
             {{ trans('privacy.l.title') }}
         </flux:heading>

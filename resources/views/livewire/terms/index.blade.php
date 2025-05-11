@@ -4,7 +4,7 @@
         icon="handshake"
         :description="trans('terms.description')"
     />
-    <flux:card class="p-5 sm:p-6 space-y-4">
+    <flux:card class="p-5 sm:p-6 space-y-4 !shadow-lg">
         <flux:heading level="2">
             {{ trans('terms.a.title') }}
         </flux:heading>
@@ -13,7 +13,7 @@
             <p>{{ trans('terms.a.text') }}</p>
         </flux:text>
     </flux:card>
-    <flux:card class="p-5 sm:p-6 space-y-4">
+    <flux:card class="p-5 sm:p-6 space-y-4 !shadow-lg">
         <flux:heading level="2">
             {{ trans('terms.b.title') }}
         </flux:heading>
@@ -22,7 +22,7 @@
             <p>{{ trans('terms.b.text') }}</p>
         </flux:text>
     </flux:card>
-    <flux:card class="p-5 sm:p-6 space-y-4">
+    <flux:card class="p-5 sm:p-6 space-y-4 !shadow-lg">
         <flux:heading level="2">
             {{ trans('terms.c.title') }}
         </flux:heading>
@@ -52,7 +52,7 @@
             </flux:text>
         </div>
     </flux:card>
-    <flux:card class="p-5 sm:p-6 space-y-4">
+    <flux:card class="p-5 sm:p-6 space-y-4 !shadow-lg">
         <flux:heading level="2">
             {{ trans('terms.d.title') }}
         </flux:heading>
@@ -75,7 +75,7 @@
             </flux:text>
         </div>
     </flux:card>
-    <flux:card class="p-5 sm:p-6 space-y-4">
+    <flux:card class="p-5 sm:p-6 space-y-4 !shadow-lg">
         <flux:heading level="2">
             {{ trans('terms.e.title') }}
         </flux:heading>
@@ -97,7 +97,7 @@
             </flux:text>
         </div>
     </flux:card>
-    <flux:card class="p-5 sm:p-6 space-y-2">
+    <flux:card class="p-5 sm:p-6 space-y-2 !shadow-lg">
         <flux:heading level="2">
             {{ trans('terms.f.title') }}
         </flux:heading>
@@ -106,7 +106,7 @@
             <p>{{ trans('terms.f.text') }}</p>
         </flux:text>
     </flux:card>
-    <flux:card class="p-5 sm:p-6 space-y-4">
+    <flux:card class="p-5 sm:p-6 space-y-4 !shadow-lg">
         <flux:heading level="2">
             {{ trans('terms.g.title') }}
         </flux:heading>
@@ -116,7 +116,7 @@
             <p>{{ trans('terms.g.text2') }}</p>
         </flux:text>
     </flux:card>
-    <flux:card class="p-5 sm:p-6 space-y-4">
+    <flux:card class="p-5 sm:p-6 space-y-4 !shadow-lg">
         <flux:heading level="2">
             {{ trans('terms.h.title') }}
         </flux:heading>
@@ -131,7 +131,7 @@
             </ol>
         </flux:text>
     </flux:card>
-    <flux:card class="p-5 sm:p-6 space-y-4">
+    <flux:card class="p-5 sm:p-6 space-y-4 !shadow-lg">
         <flux:heading level="2">
             {{ trans('terms.i.title') }}
         </flux:heading>
@@ -140,7 +140,7 @@
             <p>{{ trans('terms.i.text') }}</p>
         </flux:text>
     </flux:card>
-    <flux:card class="p-5 sm:p-6 space-y-4">
+    <flux:card class="p-5 sm:p-6 space-y-4 !shadow-lg">
         <flux:heading level="2">
             {{ trans('terms.j.title') }}
         </flux:heading>
@@ -149,7 +149,7 @@
             <p>{{ trans('terms.j.text') }}</p>
         </flux:text>
     </flux:card>
-    <flux:card class="p-5 sm:p-6 space-y-4">
+    <flux:card class="p-5 sm:p-6 space-y-4 !shadow-lg">
         <flux:heading level="2">
             {{ trans('terms.k.title') }}
         </flux:heading>
@@ -158,7 +158,7 @@
             <p>{{ trans('terms.k.text') }}</p>
         </flux:text>
     </flux:card>
-    <flux:card class="p-5 sm:p-6 space-y-4">
+    <flux:card class="p-5 sm:p-6 space-y-4 !shadow-lg">
         <flux:heading level="2">
             {{ trans('terms.l.title') }}
         </flux:heading>
@@ -167,7 +167,7 @@
             <p>{{ trans('terms.l.text') }}</p>
         </flux:text>
     </flux:card>
-    <flux:card class="p-5 sm:p-6 space-y-4">
+    <flux:card class="p-5 sm:p-6 space-y-4 !shadow-lg">
         <flux:heading level="2">
             {{ trans('terms.m.title') }}
         </flux:heading>
@@ -176,7 +176,7 @@
             <p>{{ trans('terms.m.text', ['email' => $contact]) }}</p>
         </flux:text>
     </flux:card>
-    <flux:card class="p-5 sm:p-6 space-y-4">
+    <flux:card class="p-5 sm:p-6 space-y-4 !shadow-lg">
         <flux:heading level="2">
             {{ trans('terms.n.title') }}
         </flux:heading>

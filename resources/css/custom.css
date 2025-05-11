@@ -131,7 +131,7 @@
 
     select, [data-flux-select], [data-flux-select-button]
     {
-        @apply !h-11 !shadow-none dark:!shadow-none dark:bg-charcoal;
+        @apply !text-sm !h-11 !shadow-none dark:!shadow-none dark:bg-charcoal;
     }
 
     [data-flux-date-picker-button]

@@ -1,5 +1,5 @@
 @props(['comments', 'name', 'position'])
-<flux:card class="relative space-y-6 p-4 sm:p-6 pt-8 sm:pt-12">
+<flux:card class="relative space-y-6 p-4 sm:p-6 pt-8 sm:pt-12 !shadow-lg xl:!shadow-xl">
     <div class="absolute top-4 xs:top-0 left-4 xs:left-1/2 xs:-translate-x-1/2 xs:-translate-y-1/2 transform">
         <div class="inline-flex size-10 xs:size-12 items-center justify-center rounded-lg aspect-square bg-indigo-100 dark:bg-indigo-500">
             <flux:icon.message-circle-heart class="size-6 xs:size-8 text-indigo-500 dark:text-indigo-200" />
