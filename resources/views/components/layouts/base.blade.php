@@ -28,7 +28,11 @@
         @livewireScripts
         @fluxScripts
         @if(app()->isProduction())
-            <script data-collect-dnt="true" async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+            <script
+                src="https://cdn.usefathom.com/script.js"
+                data-site="{{ config('settings.fathom') }}"
+                defer
+            ></script>
         @endif
     </body>
 </html>
