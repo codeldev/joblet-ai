@@ -9,13 +9,12 @@ return [
     'presets' => [
         Spatie\Csp\Presets\Basic::class,
         Spatie\Csp\Presets\BunnyFonts::class,
+        Spatie\Csp\Presets\Fathom::class,
     ],
     'directives' => [
         [Directive::STYLE, Keyword::UNSAFE_INLINE],
         [Directive::SCRIPT, Keyword::UNSAFE_INLINE],
         [Directive::SCRIPT, Keyword::UNSAFE_EVAL],
-        [Directive::SCRIPT, 'scripts.simpleanalyticscdn.com/'],
-        [Directive::IMG, 'queue.simpleanalyticscdn.com'],
     ],
     'report_only_presets'         => [],
     'report_only_directives'      => [],
