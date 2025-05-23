@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 @import '../../vendor/livewire/flux/dist/flux.css';
 @import './custom.css';
+@import './blog.css';
 @source '../views';
 @source '../resources/js/app/typewriter.js';
 @plugin 'tailwind-scrollbar';

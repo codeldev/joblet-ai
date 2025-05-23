@@ -5,7 +5,10 @@
 
 declare(strict_types=1);
 
+use App\Enums\PostStatusEnum;
 use App\Http\Requests\Sitemap\SitemapRequest;
+use App\Models\BlogPost;
+use App\Services\Sitemap\GeneratorService;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Response;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
@@ -80,5 +83,62 @@ describe(description: 'SitemapRequest', tests: function (): void
         expect(value: $methodBody)
             ->toContain(needle: 'GeneratorService')
             ->toContain(needle: '->get()');
+    });
+
+    it(description: 'includes blog posts in the sitemap', closure: function (): void
+    {
+        $generatorService = new GeneratorService();
+        $sitemap          = $generatorService->get();
+
+        expect(value: $sitemap)
+            ->toBeString()
+            ->toContain(needle: '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
+            ->toContain(needle: '</urlset>');
+
+        $reflectionClass = new ReflectionClass(objectOrClass: GeneratorService::class);
+        $methodBody      = file_get_contents(
+            filename: $reflectionClass->getFileName()
+        );
+
+        expect(value: $methodBody)
+            ->toContain(needle: 'posts()')
+            ->toContain(needle: 'BlogPost::query()')
+            ->toContain(needle: 'PostStatusEnum::PUBLISHED');
+    });
+
+    it(description: 'only includes published blog posts in the sitemap', closure: function (): void
+    {
+        $publishedPost = BlogPost::factory()->create(attributes: [
+            'status'       => PostStatusEnum::PUBLISHED,
+            'published_at' => now()->subDay(),
+        ]);
+
+        $draftPost = BlogPost::factory()->create(attributes: [
+            'status'       => PostStatusEnum::DRAFT,
+            'published_at' => null,
+        ]);
+
+        expect(value: (new GeneratorService)->get())
+            ->toBeString()
+            ->toContain(needle: '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
+            ->toContain(needle: route(name: 'resources.post', parameters: $publishedPost))
+            ->not->toContain(needle: route(name: 'resources.post', parameters: $draftPost));
+    });
+
+    it(description: 'formats blog post URLs correctly in the sitemap', closure: function (): void
+    {
+        $published = now()->subDays(value: 5);
+        $blogPost  = BlogPost::factory()->create(attributes: [
+            'status'       => PostStatusEnum::PUBLISHED,
+            'published_at' => $published,
+            'slug'         => 'test-blog-post',
+        ]);
+
+        expect(value: (new GeneratorService)->get())
+            ->toBeString()
+            ->toContain(needle: '<loc>' . route(name: 'resources.post', parameters: $blogPost) . '</loc>')
+            ->toContain(needle: '<lastmod>' . $published->toIso8601String() . '</lastmod>')
+            ->toContain(needle: '<changefreq>monthly</changefreq>')
+            ->toContain(needle: '<priority>0.8</priority>');
     });
 });

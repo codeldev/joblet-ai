@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-//use App\Models\Order;
-//use App\Models\Payment;
-//use App\Services\Models\UserService;
-//use Illuminate\Support\Facades\Route;
+// use App\Models\Order;
+// use App\Models\Payment;
+// use App\Services\Models\UserService;
+// use Illuminate\Support\Facades\Route;
 
-//Route::get('mailable', static function ()
-//{
+// Route::get('mailable', static function ()
+// {
 //    $data = [
 //        'name'    => 'Jane Smith',
 //        'email'   => 'jane.smith@example.com',
@@ -18,10 +18,10 @@ declare(strict_types=1);
 //    return (new App\Notifications\Auth\LoginLinkNotification)->toMail(UserService::getSupportUser());
 //    //    return new App\Notifications\Contact\FeedbackMessageNotification($data)
 //    //        ->toMail(UserService::getSupportUser());
-//});
+// });
 
-//Route::get('pdf', static function ()
-//{
+// Route::get('pdf', static function ()
+// {
 //    $order   = Order::find('0196ba6d-0c92-73ce-a684-ee818f65c74b');
 //    // Payment::factory()->create(['order_id' => $order->id, 'user_id' => $order->user_id]);
 //    $pdfData = new App\Services\Invoice\InvoiceDataService(order: $order)->build();
@@ -35,4 +35,4 @@ declare(strict_types=1);
 //        ->generate();
 //
 //    return $service->outputToBrowser();
-//});
+// });

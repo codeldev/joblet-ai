@@ -8,6 +8,8 @@ use App\Actions\Contact\SendContactAction;
 use App\Actions\Contact\SendFeedbackAction;
 use App\Actions\Generator\GenerateAction;
 use App\Actions\Generator\UploadAction;
+use App\Actions\Images\GenerateAction as ImageGenerateAction;
+use App\Actions\Images\ResizeAction;
 use App\Actions\Orders\OrderAction;
 use App\Actions\Orders\PaymentAction;
 use App\Actions\Orders\ProcessAction;
@@ -16,6 +18,8 @@ use App\Contracts\Actions\Contact\SendContactActionInterface;
 use App\Contracts\Actions\Contact\SendFeedbackActionInterface;
 use App\Contracts\Actions\Generator\GenerateActionInterface;
 use App\Contracts\Actions\Generator\UploadActionInterface;
+use App\Contracts\Actions\Images\GenerateActionInterface as ImageGenerateActionInterface;
+use App\Contracts\Actions\Images\ResizeActionInterface;
 use App\Contracts\Actions\Orders\OrderActionInterface;
 use App\Contracts\Actions\Orders\PaymentActionInterface;
 use App\Contracts\Actions\Orders\ProcessActionInterface;
@@ -66,6 +70,16 @@ final class ActionServiceProvider extends ServiceProvider
         $this->app->bind(
             abstract: UploadActionInterface::class,
             concrete: UploadAction::class
+        );
+
+        $this->app->bind(
+            abstract: ImageGenerateActionInterface::class,
+            concrete: ImageGenerateAction::class
+        );
+
+        $this->app->bind(
+            abstract: ResizeActionInterface::class,
+            concrete: ResizeAction::class
         );
     }
 }

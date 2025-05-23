@@ -36,6 +36,23 @@ test(description: 'constructor sets default model', closure: function (): void
         ->toBe(expected: 'gpt-3.5-turbo');
 });
 
+test(description: 'constructor handles non-string config values for model', closure: function (): void
+{
+    config(['openai.model' => 123]);
+
+    $result = new Generator(settings: [])->builder();
+
+    expect(value: $result)
+        ->toBeArray()
+        ->toHaveKey(key: 'model')
+        ->and(value: $result['model'])
+        ->toBe(expected: 'gpt-3.5-turbo')
+        ->and(value: $result['model'])
+        ->toBeString();
+
+    config(['openai.model' => 'gpt-3.5-turbo']);
+});
+
 test(description: 'builder returns complete configuration array', closure: function (): void
 {
     $result = new Generator(settings: [

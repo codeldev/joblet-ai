@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Services\Sitemap;
 
 use App\Contracts\Services\Sitemap\GeneratorServiceInterface;
+use App\Enums\PostStatusEnum;
+use App\Models\BlogPost;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Cache;
 
@@ -18,7 +20,7 @@ final class GeneratorService implements GeneratorServiceInterface
         $sitemap = Cache::remember(
             key     : 'sitemap',
             ttl     : now()->addWeek(),
-            callback: fn (): string => $this->start()->pages()->end()
+            callback: fn (): string => $this->start()->pages()->posts()->end()
         );
 
         return $sitemap;
@@ -37,6 +39,27 @@ final class GeneratorService implements GeneratorServiceInterface
         $this->output .= '</urlset>';
 
         return $this->output;
+    }
+
+    private function posts(): self
+    {
+        BlogPost::query()->where(
+            column: 'status',
+            operator: '=',
+            value: PostStatusEnum::PUBLISHED
+        )->orderBy(
+            column: 'published_at'
+        )->get()->each(callback: function (BlogPost $post): void
+        {
+            $this->add(
+                url      : route(name: 'resources.post', parameters: $post),
+                updated  : $post->published_at ?? now(),
+                priority : 0.8,
+                frequency: 'monthly'
+            );
+        });
+
+        return $this;
     }
 
     private function pages(): self

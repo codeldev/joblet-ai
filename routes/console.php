@@ -13,3 +13,17 @@ Schedule::command(command: 'backup:clean')
     ->daily()
     ->at(time: '03:00')
     ->withoutOverlapping();
+
+Schedule::command(command: 'blog:ideas:process')
+    ->everyTwoHours()
+    ->between('10.00', '22:00')
+    ->withoutOverlapping();
+
+Schedule::command(command: 'blog:ideas:queue')
+    ->everyTwoHours()
+    ->between('10.00', '22:00')
+    ->withoutOverlapping();
+
+Schedule::command(command: 'blog:posts:publish')
+    ->dailyAt(time: '1.00')
+    ->withoutOverlapping();
