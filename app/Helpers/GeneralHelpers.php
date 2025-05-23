@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 if (! function_exists(function: 'notEmpty'))
 {
-    /** @param string|array<mixed>|null $value */
+    /** @param string|array<mixed>|null|mixed $value */
     function notEmpty(mixed $value): bool
     {
         if (is_array(value: $value))
@@ -14,11 +14,34 @@ if (! function_exists(function: 'notEmpty'))
             return $value !== [];
         }
 
-        return ! in_array(
-            needle  : $value,
-            haystack: [null, '0', ''],
-            strict  : true
-        );
+        if ($value === null)
+        {
+            return false;
+        }
+
+        if (is_bool(value: $value))
+        {
+            return true;
+        }
+
+        if (is_numeric(value: $value) && $value !== '0')
+        {
+            return true;
+        }
+
+        if (is_string(value: $value))
+        {
+            return $value !== '' && $value !== '0';
+        }
+
+        if (is_scalar(value: $value) || (is_object(value: $value) && method_exists(object_or_class: $value, method: '__toString')))
+        {
+            $stringValue = (string) $value;
+
+            return $stringValue !== '' && $stringValue !== '0';
+        }
+
+        return true;
     }
 }
 
@@ -105,5 +128,23 @@ if (! function_exists(function: 'cleanNl2br'))
         return nl2br(string: str(string: $string)
             ->replaceMatches(pattern: "/\n\n/", replace: "\n")
             ->toString());
+    }
+}
+
+if (! function_exists(function: 'throwException'))
+{
+    /** @throws Exception */
+    function throwException(string $exceptionClass): void
+    {
+        $exception = new $exceptionClass();
+
+        if (! $exception instanceof Exception)
+        {
+            throw new RuntimeException(message: "{$exceptionClass} is not an instance of Exception!");
+        }
+
+        report(exception: $exception);
+
+        throw $exception;
     }
 }

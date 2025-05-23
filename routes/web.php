@@ -21,6 +21,16 @@ Route::middleware('web-app')->group(callback: function (): void
     Route::get('generator', App\Livewire\Generator\Index::class)
         ->name('generator');
 
+    Route::name('resources.')
+        ->prefix('resources')
+        ->group(function (): void
+        {
+            Route::get('/', App\Livewire\Blog\Index::class)
+                ->name('index');
+            Route::get('{post}', App\Livewire\Blog\Post::class)
+                ->name('post');
+        });
+
     Route::middleware('guest')->group(function (): void
     {
         Route::get('auth', App\Livewire\Auth\Index::class)

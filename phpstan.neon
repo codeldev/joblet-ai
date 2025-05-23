@@ -17,6 +17,9 @@ parameters:
         - '#Parameter \$view of function view expects view-string\|null, string given.#'
         - '#Cannot call method layoutData\(\) on mixed.#'
         - '#Method App\\Services\\Backups\\BackupService::createBackupFile\(\) should return bool but returns ZanySoft\\Zip\\Zip.#'
+        # Ignore missing value type in array for Anthropic facade due to IDE compatibility issues
+        - message: '#Class App\\Facades\\Anthropic has PHPDoc tag @method for method sendMessage\(\) parameter \#1 \$parameters with no value type specified in iterable type array\.#'
+          path: app/Facades/Anthropic.php
 
     excludePaths:
         - app/Concerns/HasNotificationsTrait.php

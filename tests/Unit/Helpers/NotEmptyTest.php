@@ -1,98 +1,151 @@
 <?php
 
-declare(strict_types=1);
+/** @noinspection StaticClosureCanBeUsedInspection */
 
-use function PHPUnit\Framework\assertFalse;
-use function PHPUnit\Framework\assertTrue;
+declare(strict_types=1);
 
 it('returns true for non-empty strings', function (): void
 {
-    assertTrue(notEmpty(value: 'test'));
-    assertTrue(notEmpty(value: '1'));
-    assertTrue(notEmpty(value: 'a'));
-    assertTrue(notEmpty(value: '0.0'));
-    assertTrue(notEmpty(value: ' '));
-    assertTrue(notEmpty(value: '  '));
-    assertTrue(notEmpty(value: '0 '));
-    assertTrue(notEmpty(value: 'false'));
-    assertTrue(notEmpty(value: 'null'));
+    expect(value: notEmpty(value: 'test'))
+        ->toBeTrue()
+        ->and(value: notEmpty(value: '1'))
+        ->toBeTrue()
+        ->and(value: notEmpty(value: 'a'))
+        ->toBeTrue()
+        ->and(value: notEmpty(value: '0.0'))
+        ->toBeTrue()
+        ->and(value: notEmpty(value: ' '))
+        ->toBeTrue()
+        ->and(value: notEmpty(value: '  '))
+        ->toBeTrue()
+        ->and(value: notEmpty(value: '0 '))
+        ->toBeTrue()
+        ->and(value: notEmpty(value: 'false'))
+        ->toBeTrue()
+        ->and(value: notEmpty(value: 'null'))
+        ->toBeTrue();
 });
 
 it('returns false for empty strings', function (): void
 {
-    assertFalse(notEmpty(value: ''));
-    assertFalse(notEmpty(value: '0'));
-    assertFalse(notEmpty(value: null));
+    expect(value: notEmpty(value: ''))
+        ->toBeFalse()
+        ->and(value: notEmpty(value: '0'))
+        ->toBeFalse()
+        ->and(value: notEmpty(value: null))
+        ->toBeFalse();
 });
 
 it('returns true for non-empty arrays', function (): void
 {
-    assertTrue(notEmpty(value: [1, 2, 3]));
-    assertTrue(notEmpty(value: ['']));
-    assertTrue(notEmpty(value: [0]));
-    assertTrue(notEmpty(value: [null]));
-    assertTrue(notEmpty(value: [false]));
-    assertTrue(notEmpty(value: ['key' => 'value']));
-    assertTrue(notEmpty(value: [0 => 'value']));
+    expect(value: notEmpty(value: [1, 2, 3]))
+        ->toBeTrue()
+        ->and(value: notEmpty(value: ['']))
+        ->toBeTrue()
+        ->and(value: notEmpty(value: [0]))
+        ->toBeTrue()
+        ->and(value: notEmpty(value: [null]))
+        ->toBeTrue()
+        ->and(value: notEmpty(value: [false]))
+        ->toBeTrue()
+        ->and(value: notEmpty(value: ['key' => 'value']))
+        ->toBeTrue()
+        ->and(value: notEmpty(value: [0 => 'value']))
+        ->toBeTrue();
 });
 
 it('returns false for empty arrays', function (): void
 {
-    assertFalse(notEmpty(value: []));
+    expect(value: notEmpty(value: []))
+        ->toBeFalse();
 });
 
 it('handles boolean values correctly', function (): void
 {
-    assertTrue(notEmpty(value: true));
-    assertTrue(notEmpty(value: false));
+    expect(value: notEmpty(value: true))
+        ->tobeTrue()
+        ->and(value: notEmpty(value: false))
+        ->tobeTrue();
 });
 
 it('handles numeric values correctly', function (): void
 {
-    assertTrue(notEmpty(value: 0));
-    assertTrue(notEmpty(value: 1));
-    assertTrue(notEmpty(value: -1));
-    assertTrue(notEmpty(value: 0.0));
-    assertTrue(notEmpty(value: 1.1));
+    expect(value: notEmpty(value: 0))
+        ->toBeTrue()
+        ->and(value: notEmpty(value: 1))
+        ->toBeTrue()
+        ->and(value: notEmpty(value: -1))
+        ->toBeTrue()
+        ->and(value: notEmpty(value: 0.0))
+        ->toBeTrue()
+        ->and(value: notEmpty(value: 1.1))
+        ->toBeTrue();
 });
 
 it('handles objects correctly', function (): void
 {
-    assertTrue(notEmpty(value: new stdClass()));
-    assertTrue(notEmpty(value: (object) ['property' => 'value']));
+    expect(value: notEmpty(value: new stdClass()))
+        ->toBeTrue()
+        ->and(value: notEmpty(value: (object) ['property' => 'value']))
+        ->toBeTrue();
 });
 
-it('handles resources correctly', function (): void
+it('handles objects with __toString method correctly', function (): void
 {
-    $resource = fopen('php://memory', 'r');
-    assertTrue(notEmpty(value: $resource));
-    fclose($resource);
+    $objectWithToString = new class
+    {
+        public function __toString(): string
+        {
+            return 'test';
+        }
+    };
+
+    $emptyObjectWithToString = new class
+    {
+        public function __toString(): string
+        {
+            return '';
+        }
+    };
+
+    $zeroObjectWithToString = new class
+    {
+        public function __toString(): string
+        {
+            return '0';
+        }
+    };
+
+    expect(value: notEmpty(value: $objectWithToString))
+        ->toBeTrue()
+        ->and(value: notEmpty(value: $emptyObjectWithToString))
+        ->toBeFalse()
+        ->and(value: notEmpty(value: $zeroObjectWithToString))
+        ->toBeFalse();
 });
 
 it('handles callables correctly', function (): void
 {
-    assertTrue(notEmpty(value: fn () => true));
-
-    assertTrue(notEmpty(value: fn () => true));
-
-    assertTrue(notEmpty(value: 'strlen'));
+    expect(value: notEmpty(value: static fn () => true))
+        ->toBeTrue()
+        ->and(value: notEmpty(value: static fn () => true))
+        ->toBeTrue()
+        ->and(value: notEmpty(value: 'strlen'))
+        ->toBeTrue();
 });
 
 it('handles edge cases correctly', function (): void
 {
-    // Empty string with spaces
-    assertTrue(notEmpty(value: ' '));
-
-    // String zero with spaces
-    assertTrue(notEmpty(value: ' 0 '));
-
-    // Array with empty values
-    assertTrue(notEmpty(value: [null, '', '0']));
-
-    // Nested empty array
-    assertTrue(notEmpty(value: [[]]));
-
-    // String that looks like boolean
-    assertTrue(notEmpty(value: 'false'));
-    assertTrue(notEmpty(value: 'true'));
+    expect(value: notEmpty(value: ' '))
+        ->toBeTrue()
+        ->and(value: notEmpty(value: ' 0 '))
+        ->toBeTrue()
+        ->and(value: notEmpty(value: [null, '', '0']))
+        ->toBeTrue()
+        ->and(value: notEmpty(value: [[]]))
+        ->toBeTrue()
+        ->and(value: notEmpty(value: 'false'))
+        ->toBeTrue()
+        ->and(value: notEmpty(value: 'true'))
+        ->toBeTrue();
 });

@@ -15,7 +15,12 @@ final readonly class Generator
     /** @param array<string, mixed> $settings */
     public function __construct(public array $settings)
     {
-        $this->model = config(key: 'openai.model', default: 'gpt-3.5-turbo');
+        $default     = 'gpt-3.5-turbo';
+        $configModel = config(key: 'openai.model', default: $default);
+
+        $this->model = is_string($configModel)
+            ? $configModel
+            : $default;
     }
 
     /** @return array<string, mixed> */

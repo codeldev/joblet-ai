@@ -10,4 +10,6 @@ return [
     App\Providers\BackupServiceProvider::class,
     App\Providers\HomeServiceProvider::class,
     App\Providers\PanServiceProvider::class,
+    App\Providers\BlogServiceProvider::class,
+    App\Providers\AiServiceProvider::class,
 ];
