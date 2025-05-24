@@ -96,6 +96,8 @@ final class BackupService implements BackupServiceInterface
             $zip = Zip::create(zip_file: $this->filePath);
             $zip->add(file_path: $this->envPath, flatroot: true);
             $zip->add(file_path: $this->sqlPath, flatroot: true);
+            $zip->add(file_path: storage_path(path: 'app/private/blog'));
+            $zip->add(file_path: storage_path(path: 'app/public/blog'));
             $zip->close();
 
             return Zip::check(zip_file: $this->filePath);
