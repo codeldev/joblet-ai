@@ -27,3 +27,9 @@ Schedule::command(command: 'blog:ideas:queue')
 Schedule::command(command: 'blog:posts:publish')
     ->dailyAt(time: '1.00')
     ->withoutOverlapping();
+
+Schedule::command(command: 'blog:posts:youtube')
+    ->weekly()
+    ->sundays()
+    ->at(time: '05:00')
+    ->withoutOverlapping();
