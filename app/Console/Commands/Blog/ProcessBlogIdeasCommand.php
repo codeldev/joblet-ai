@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use JsonException;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -261,6 +262,11 @@ final class ProcessBlogIdeasCommand extends Command implements ProcessBlogIdeasC
 
     private function displayMessage(string $message, string $type = 'info'): void
     {
+        if ($type === 'error' && app()->isProduction())
+        {
+            Log::error(message: $message);
+        }
+
         if ($this->showOutput)
         {
             match ($type)
@@ -275,6 +281,7 @@ final class ProcessBlogIdeasCommand extends Command implements ProcessBlogIdeasC
     private function setRequiredKeys(): void
     {
         $this->requiredKeys = [
+            'topic',
             'keywords',
             'focus',
             'requirements',

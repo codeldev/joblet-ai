@@ -106,7 +106,7 @@ final class MarkdownToHtml
 
         $tocItems = $this->extractTocItems();
 
-        if (! notEmpty(value: $tocItems))
+        if (notEmpty(value: $tocItems))
         {
             /** @var array<int, object> $objectTocItems */
             $objectTocItems = array_map(

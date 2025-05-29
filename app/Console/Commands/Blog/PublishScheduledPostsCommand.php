@@ -10,6 +10,7 @@ use App\Models\BlogPost;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Throwable;
 
@@ -142,6 +143,11 @@ final class PublishScheduledPostsCommand extends Command implements PublishSched
 
     private function displayMessage(string $message, string $type = 'info'): void
     {
+        if ($type === 'error' && app()->isProduction())
+        {
+            Log::error(message: $message);
+        }
+
         if ($this->showOutput)
         {
             match ($type)

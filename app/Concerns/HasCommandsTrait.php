@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Concerns;
 
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\Console\Input\InputOption;
 
 trait HasCommandsTrait
@@ -33,6 +34,11 @@ trait HasCommandsTrait
 
     protected function outputErrorMessage(string $message): void
     {
+        if (app()->isProduction())
+        {
+            Log::error(message: $message);
+        }
+
         if ($this->isRunningManually())
         {
             $this->error(string: $message);
